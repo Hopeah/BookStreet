@@ -1,24 +1,30 @@
 # P0
+
 ## Users
-    Registration/login -> button that leads to a login page with login/password fields and a link to account creation if is hasn’t been done yet 
-    Google authentication -> an option on a login page?
-    Successful registration email -> find a template somewhere?
-    Password storage/reminder? -> encryption? 
-    User profile -> a separate page with fields below
-        Name (change) -> empty or pre-generated first? 
-        Avatar (change) -> get from google if google auth, ability to upload one
-        Email (change) -> get from registration
-        Password (change) -> hide behind stars, changing requires email code
-        Date of registration -> static from database
+
+1. Registration/login -> button that leads to a login page with login/password fields and a link to account creation if is hasn’t been done yet 
+2. Google authentication -> an option on a login page?
+3. Successful registration email -> find a template somewhere?
+4. Password storage/reminder? -> encryption? 
+5. User profile -> a separate page with fields below
+	1. Name (change) -> empty or pre-generated first? 
+        2. Avatar (change) -> get from google if google auth, ability to upload one
+        3. Email (change) -> get from registration
+        4. Password (change) -> hide behind stars, changing requires email code
+        5. Date of registration -> static from database
+
 ## Frontpage (not logged in users)
-    About button -> on the top right, leads to an about page
-    Contact button -> on the top right, leads to a contact page
-    Login button -> in the center, leads to a login page
+
+1. About button -> on the top right, leads to an about page
+2. Contact button -> on the top right, leads to a contact page
+3. Login button -> in the center, leads to a login page
+
 ## Homepage
-	User Welcome -> using a set name from user profile
-    Reading Progress -> current documents being read are displayed with a progress bar (screen center?)
-    Book Wishlist -> books that are on a wish list are displayed (screen left?)
-    Read/Paused -> books that were completed/paused are displayed (screen right?)
+
+1. User Welcome -> using a set name from user profile
+2. Reading Progress -> current documents being read are displayed with a progress bar (screen center?)
+3. Book Wishlist -> books that are on a wish list are displayed (screen left?)
+4. Read/Paused -> books that were completed/paused are displayed (screen right?)
 
 ## Reading documents
 
