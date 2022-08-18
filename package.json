@@ -1,0 +1,30 @@
+{
+  "name": "project0",
+  "version": "1.0.0",
+  "description": "P0\r Users\r     Registration/login -> button that leads to a login page with login/password fields and a link to account creation if is hasn’t been done yet \r     Google authentication -> an option on a login page?\r     Successful registration email -> find a template somewhere?\r     Password storage/reminder? -> encryption? \r     User profile -> a separate page with fields below\r         Name (change) -> empty or pre-generated first? \r         Avatar (change) -> get from google if google auth, ability to upload one\r         Email (change) -> get from registration\r         Password (change) -> hide behind stars, changing requires email code\r         Date of registration -> static from database\r Frontpage (not logged in users)\r     About button -> on the top right, leads to an about page\r     Contact button -> on the top right, leads to a contact page\r     Login button -> in the center, leads to a login page\r Homepage\r \tUser Welcome -> using a set name from user profile\r     Reading Progress -> current documents being read are displayed with a progress bar (screen center?)\r     Book Wishlist -> books that are on a wish list are displayed (screen left?)\r     Read/Paused -> books that were completed/paused are displayed (screen right?)\r Reading documents\r     Status -> marking every document based on the reading progress\r \t    Future Read\r         Active\r         Paused\r         Read\r Properties -> various document properties, full list can be viewed by clicking on it? Certain properties will be visible all the time (on homepage, lists?)\r     Title -> always\r     Author\r     Genre\r     Links to download/get -> always\r     Comments/Review/Notes -> a field that can be filled out\r     Rating\r     Type -> always \r         Book\r         Article\r         Journal\r         Comics/Manga\r Reading lists\r \tCreate lists -> lists could contain a limited? number of documents, contain the name of who it was created by\r \tDelete lists -> list owner can delete a list\r     List sharing -> a list can be freely shared by anyone with a link, ability to clone a list to become an owner of a copy\r Bonus…\r     Dark/light modes\r     Different greeting based on time of the day\r     Book library API\r     Allow dragging list items around to the list owner\r     List visibility (public/private)\r     List info (when it was created/when it was last modified)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hopeah/Project0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hopeah/Project0/issues"
+  },
+  "homepage": "https://github.com/Hopeah/Project0#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongodb": "^4.8.1",
+    "mongoose": "^6.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

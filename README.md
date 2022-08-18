@@ -25,7 +25,6 @@ Reading documents
         Active
         Paused
         Read
-
 Properties -> various document properties, full list can be viewed by clicking on it? Certain properties will be visible all the time (on homepage, lists?)
     Title -> always
     Author
