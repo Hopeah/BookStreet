@@ -8,10 +8,10 @@
 4. Password storage/reminder? -> encryption? 
 5. User profile -> a separate page with fields below
 	1. Name (change) -> empty or pre-generated first? 
-        2. Avatar (change) -> get from google if google auth, ability to upload one
-        3. Email (change) -> get from registration
-        4. Password (change) -> hide behind stars, changing requires email code
-        5. Date of registration -> static from database
+	2. Avatar (change) -> get from google if google auth, ability to upload one
+	3. Email (change) -> get from registration
+	4. Password (change) -> hide behind stars, changing requires email code
+	5. Date of registration -> static from database
 
 ## Frontpage (not logged in users)
 
