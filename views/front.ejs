@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project0</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-preload landing">
+    <!-- Header -->
+    <div id="page-wrapper">
+        <header id="header">
+            <h1 id="logo"><a href="/">Project0</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn button primary">Log in</button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <form id="login-form" class="login-overlay">
+                                    <input type="text" name="username" id="username-field" class="login-form-field login-overlay" placeholder="Username">
+                                    <input type="password" name="password" id="password-field" class="login-form-field login-overlay" placeholder="Password">
+                                    <input type="submit" value="Login" id="login-form-submit" class="login-overlay">
+                                    <label class="login-overlay message">
+                                        <input  type="checkbox"
+                                                checked="checked" class="login-overlay label">
+                                        Keep me signed in
+                                    </label>
+                                    <p class="message">Not registered? <a href="register">Create an account</a></p>
+                                </form>
+                            </div>
+                          </div>
+                    </li>
+                    <!-- <li><a href="/login" class="button primary">Log in</a></li> -->
+                </ul>
+            </nav>
+        </header>
+    
+        <!-- Banner -->
+        <section id="banner">
+            <div class="content">
+                <header>
+                    <h2>The future has landed</h2>
+                    <p>And there are no hoverboards or flying cars.<br />
+                    Just apps. Lots of mother flipping apps.</p>
+                </header>
+                <span class="image"><img src="images/pic01.jpg" alt="" /></span>
+            </div>
+        </section>
+    </div>
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/dropdown.js"></script>
+</body>
+</html>
