@@ -265,6 +265,10 @@ body.landing #header {
         z-index: 1;
     }
 
+    #banner .content.middle {
+        text-align: center;
+    }
+
         #banner .content header {
             display: inline-block;
             vertical-align: middle;
