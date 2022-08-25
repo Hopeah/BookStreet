@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project0</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="is-preload landing">
     <!-- Header -->
@@ -13,30 +14,37 @@
         <header id="header">
             <h1 id="logo"><a href="/">Project0</a></h1>
             <nav id="nav">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn button primary">Log in</button>
-                            <div id="myDropdown" class="dropdown-content">
-                                <form id="login-form" class="login-overlay">
-                                    <input type="text" name="username" id="username-field" class="login-form-field login-overlay" placeholder="Username">
-                                    <input type="password" name="password" id="password-field" class="login-form-field login-overlay" placeholder="Password">
-                                    <input type="submit" value="Login" id="login-form-submit" class="login-overlay">
-                                    <label class="login-overlay message">
-                                        <input  type="checkbox"
-                                                checked="checked" class="login-overlay label">
-                                        Keep me signed in
-                                    </label>
-                                    <p class="message">Not registered? <a href="register">Create an account</a></p>
-                                </form>
+                <div id="topnav" class="topnav">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn button primary">Log in</button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <form id="login-form" class="login-overlay">
+                                        <input type="text" name="username" id="username-field" class="login-form-field login-overlay" placeholder="Username">
+                                        <input type="password" name="password" id="password-field" class="login-form-field login-overlay" placeholder="Password">
+                                        <input type="submit" value="Login" id="login-form-submit" class="login-overlay">
+                                        <label class="login-overlay message">
+                                            <input  type="checkbox"
+                                                    checked="checked" class="login-overlay label">
+                                            Keep me signed in
+                                        </label>
+                                        <p class="message">Not registered? <a href="register">Create an account</a></p>
+                                    </form>
+                                </div>
                             </div>
-                          </div>
-                    </li>
-                    <!-- <li><a href="/login" class="button primary">Log in</a></li> -->
-                </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="icon">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                        <!-- <li><a href="/login" class="button primary">Log in</a></li> -->
+                    </ul>
+                </div>
             </nav>
         </header>
     
@@ -55,5 +63,6 @@
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script src="js/dropdown.js"></script>
+    <script src="js/responsiveNavBar.js"></script>
 </body>
 </html>
