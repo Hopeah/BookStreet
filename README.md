@@ -1,4 +1,8 @@
 # P0
+## Environments
+
+1. QA: https://projectnol.herokuapp.com/
+2. PROD: TBD
 
 ## Users
 
