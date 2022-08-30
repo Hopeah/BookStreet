@@ -19,12 +19,17 @@
   },
   "homepage": "https://github.com/Hopeah/Project0#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "jquery": "^3.6.0",
     "mongodb": "^4.8.1",
-    "mongoose": "^6.5.2"
+    "mongoose": "^6.5.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

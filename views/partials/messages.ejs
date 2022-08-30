@@ -1,0 +1,21 @@
+
+<% if(locals.errors){ %> 
+    <% errors.forEach(function(error) { %>
+        <div class="register error">
+            <%= error.msg %>
+        </div>
+        <%=console.log(error.msg)%>
+    <% }); %>
+<% } %> 
+    
+<% if(success_msg != '') { %>
+    <div class="register success">
+        <%= success_msg %>
+    </div>
+<% } %>
+
+<% if(error != '') { %>
+    <div class="login error">
+        <%= error %>
+    </div>
+<% } %>
