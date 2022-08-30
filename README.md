@@ -9,7 +9,7 @@
 1. ~~Registration/login -> button that leads to a login page with login/password fields and a link to account creation if is hasn’t been done yet~~
 2. Google authentication -> an option on a login page?
 3. Successful registration email -> find a template somewhere?
-4. ~~Password storage/reminder? -> encryption? ~~
+4. ~~Password storage/reminder? -> encryption?~~
 5. User profile -> a separate page with fields below
 	1. Name (change) -> empty or pre-generated first? 
 	2. Avatar (change) -> get from google if google auth, ability to upload one
