@@ -276,7 +276,7 @@ body.landing #header {
         #banner .content header {
             display: inline-block;
             vertical-align: middle;
-			margin: 0 0 4em 0;
+			margin: 0 0 1em 0;
         }
 
             #banner .content header h2 {
@@ -453,7 +453,7 @@ form#sign-up {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
-	gap: 30px;
+	gap: 25px;
 }
 
 .icon {
@@ -613,13 +613,17 @@ form#sign-up {
 
 					#banner .content header {
 						display: block;
-						margin: 0 0 2em 0;
+						margin: 0 0 0.5em 0;
 						text-align: center;
 					}
 
 					#banner .content .image {
 						margin: 0;
 					}
+
+		.icons {
+			gap: 15px;
+		}
 
 		/* Footer */
 
