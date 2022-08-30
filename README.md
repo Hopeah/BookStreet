@@ -6,7 +6,7 @@
 
 ## Users
 
-~~1. Registration/login -> button that leads to a login page with login/password fields and a link to account creation if is hasn’t been done yet~~ 
+1. ~~Registration/login -> button that leads to a login page with login/password fields and a link to account creation if is hasn’t been done yet~~
 2. Google authentication -> an option on a login page?
 3. Successful registration email -> find a template somewhere?
 4. Password storage/reminder? -> encryption? 
@@ -20,8 +20,8 @@
 ## Frontpage (not logged in users)
 
 1. About button -> on the top right, leads to an about page
-~~2. Contact button -> on the top right, leads to a contact page~~
-~~3. Login button -> in the center, leads to a login page~~
+2. ~~Contact button -> on the top right, leads to a contact page~~
+3. ~~Login button -> in the center, leads to a login page~~
 
 ## Homepage
 
