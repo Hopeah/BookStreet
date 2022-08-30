@@ -1,10 +1,13 @@
 const express = require('express')
 const app = express()
+const connectDB = require('./config/database')
 const frontRoutes = require ('./routes/front')
 const contactRoutes = require ('./routes/contact')
 const registerRoutes = require('./routes/register')
 
 require('dotenv').config({path: './config/.env'})
+
+connectDB()
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
