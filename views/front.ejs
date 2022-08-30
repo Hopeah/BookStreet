@@ -23,8 +23,8 @@
                             <div class="dropdown">
                                 <button class="dropbtn button primary">Log in</button>
                                 <div id="myDropdown" class="dropdown-content">
-                                    <form id="login-form" class="login-overlay">
-                                        <input type="text" name="username" id="username-field" class="login-form-field login-overlay" placeholder="Username">
+                                    <form id="login-form" action="/register/login" class="login-overlay" method="POST">
+                                        <input type="email" name="email" id="username-field" class="login-form-field login-overlay" placeholder="Email">
                                         <input type="password" name="password" id="password-field" class="login-form-field login-overlay" placeholder="Password">
                                         <input type="submit" value="Login" id="login-form-submit" class="login-overlay">
                                         <label class="login-overlay message">
@@ -46,8 +46,9 @@
                     </ul>
                 </div>
             </nav>
+            <%- include ("./partials/messages.ejs") %>
         </header>
-    
+
         <!-- Banner -->
         <section id="banner">
             <div class="content">
