@@ -5,65 +5,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project0</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 </head>
-<body class="is-preload landing">
-    <!-- Header -->
-    <div id="page-wrapper">
-        <header id="header">
-            <h1 id="logo"><a href="/">Project0</a></h1>
-            <nav id="nav">
-                <div id="topnav" class="topnav">
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="dropbtn button primary">Log in</button>
-                                <div id="myDropdown" class="dropdown-content">
-                                    <form id="login-form" action="/register/login" class="login-overlay" method="POST">
-                                        <input type="email" name="email" id="username-field" class="login-form-field login-overlay" placeholder="Email">
-                                        <input type="password" name="password" id="password-field" class="login-form-field login-overlay" placeholder="Password">
-                                        <input type="submit" value="Login" id="login-form-submit" class="login-overlay">
-                                        <label class="login-overlay message">
-                                            <input  type="checkbox"
-                                                    checked="checked" class="login-overlay label">
-                                            Keep me signed in
-                                        </label>
-                                        <p class="message">Not registered? <a href="register">Create an account</a></p>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="icon">
-                                <i class="fa fa-bars"></i>
-                            </a>
-                        </li>
-                        <!-- <li><a href="/login" class="button primary">Log in</a></li> -->
-                    </ul>
-                </div>
-            </nav>
-            <%- include ("./partials/messages.ejs") %>
-        </header>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid m-2">
+            <a href="/" class="navbar-brand">Project0</a>
 
-        <!-- Banner -->
-        <section id="banner">
-            <div class="content">
-                <header>
-                    <h2>The future has landed</h2>
-                    <p>And there are no hoverboards or flying cars.<br />
-                    Just apps. Lots of mother flipping apps.</p>
-                </header>
-                <span class="image"><img src="images/pic01.jpg" alt="" /></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item dropdown me-2">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false" onclick="this.blur();">Log in</button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <form class="px-4 py-3" id="login-form" action="/register/login" method="POST">
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                                <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password">
+                              </div>
+                              <div class="mb-3">
+                                <div class="form-check">
+                                  <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                  <label class="form-check-label" for="dropdownCheck">
+                                    Remember me
+                                  </label>
+                                </div>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Sign in</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">New around here? Sign up</a>
+                            <a class="dropdown-item" href="#">Forgot password?</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-info" data-bs-toggle="dropdown" aria-expanded="false" onclick="this.blur();">Sign up</button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <form class="px-4 py-3" id="register" action="/register" method="POST">
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                                <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com" value="<%= typeof email != 'undefined' ? email : '' %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormEmail1" class="form-label">Name</label>
+                                <input type="name" name="name" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormPassword1" class="form-label">Repeat password</label>
+                                <input type="password" name="password2" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Register</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </section>
-    </div>
+
+        </div>
+    </nav>
+
+    <section class="bg-dark text-light d-flex align-items-center justify-content-evenly vh-100">
+        <!-- <div class="container"> -->
+            <div class="d-sm-flex align-items-center">
+                <div class="me-4">
+                    <h2>The <span class="text-info text-opacity-75">future</span> has landed</h2>
+                    <p class="lead">And there are no hoverboards or flying cars.<br />
+                        Just apps. Lots of mother flipping apps.</p>
+                </div>
+                <img class="img-fluid rounded-circle ms-4" src="images/pic01.jpg" alt="">
+            </div>
+        <!-- </div> -->
+    </section>
+
     <!-- Scripts -->
     <script src="js/main.js"></script>
-    <script src="js/dropdown.js"></script>
-    <script src="js/responsiveNavBar.js"></script>
+    <!-- <script src="js/dropdown.js"></script> -->
+    <!-- <script src="js/responsiveNavBar.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

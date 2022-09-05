@@ -55,6 +55,7 @@
                     <h2>Sign Up</h2>
                 </header>
 
+                <!-- Value property makes sure that if the page refreshed (through incorrect info input/no user), the filled-in fields stay filled-in -->
                 <form id="register" action="/register" method="POST">
                     <input type="email" name="email" id="username-field" class="login-form-field" placeholder="Email" value="<%= typeof email != 'undefined' ? email : '' %>">
                     <input type="name" name="name" id="username-field" class="login-form-field" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>">
