@@ -28,10 +28,10 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-//Connect flash
+//Connect flash, flash + express-session allow to store flash messages in a session, and display them after a re-direct
 app.use(flash())
 
-//Global variables
+//Global variables for flash messages
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg')
     res.locals.error = req.flash('error')
@@ -44,7 +44,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-//Routes
+//Calling the routes
 app.use('/', frontRoutes)
 app.use('/contact', contactRoutes)
 app.use('/register', registerRoutes)

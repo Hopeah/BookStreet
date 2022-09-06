@@ -26,6 +26,7 @@ module.exports = {
             errors.push({msg: 'Password should be at least 5 characters'})
         }
     
+        //If there are any errors, re-render the page and display those
         if (errors.length > 0) {
             res.render('register', {
                 errors,

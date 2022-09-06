@@ -10,17 +10,18 @@ module.exports = function(passport) {
             User.findOne({email: email})
                 .then(user => {
                     if (!user) {
+                        //done(error, user, options)
                         return done(null, false, {message: 'That email is not registered'})
                     }
 
-                    //Match password
+                    //Match password, user.password is a hashed password, isMatch is a Boolean
                     bcrypt.compare(password, user.password, (error, isMatch) => {
                         if (error) throw error
 
                         if (isMatch) {
                             return done(null, user)
                         } else {
-                            return done(null, false, {message: 'Incorrect password'})
+                            return done(null, false, {message: 'Incorrect email or password'})
                         }
                     })
                 })
@@ -28,6 +29,7 @@ module.exports = function(passport) {
         })
     )
 
+    //Establishes and maintains a session via a cookie set in the user's browser
     passport.serializeUser((user, done) => {
         done(null, user.id);
       });
