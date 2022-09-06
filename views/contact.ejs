@@ -5,53 +5,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 </head>
-<body class="is-preload landing">
-    <!-- Header -->
-    <div id="page-wrapper">
-        <header id="header">
-            <h1 id="logo"><a href="/">Project0</a></h1>
-            <nav id="nav">
-                <div id="topnav" class="topnav">
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="dropbtn button primary">Log in</button>
-                                <div id="myDropdown" class="dropdown-content">
-                                    <form id="login-form" action="/register/login" class="login-overlay" method="POST">
-                                        <input type="email" name="email" id="username-field" class="login-form-field login-overlay" placeholder="Email">
-                                        <input type="password" name="password" id="password-field" class="login-form-field login-overlay" placeholder="Password">
-                                        <input type="submit" value="Login" id="login-form-submit" class="login-overlay">
-                                        <label class="login-overlay message">
-                                            <input  type="checkbox"
-                                                    checked="checked" class="login-overlay label">
-                                            Keep me signed in
-                                        </label>
-                                        <p class="message">Not registered? <a href="register">Create an account</a></p>
-                                    </form>
+<body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid m-2">
+            <a href="/" class="navbar-brand">Project0</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item dropdown me-2">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false" onclick="this.blur();">Log in</button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <form class="px-4 py-3" id="login-form" action="/register/login" method="POST">
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                                <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password">
+                              </div>
+                              <div class="mb-3">
+                                <div class="form-check">
+                                  <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                  <label class="form-check-label" for="dropdownCheck">
+                                    Remember me
+                                  </label>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="icon">
-                                <i class="fa fa-bars"></i>
-                            </a>
-                        </li>
-                        <!-- <li><a href="/login" class="button primary">Log in</a></li> -->
-                    </ul>
-                </div>
-            </nav>
-            <%- include ("./partials/messages.ejs") %>
-        </header>
-    </div>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Sign in</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">New around here? Sign up</a>
+                            <a class="dropdown-item" href="#">Forgot password?</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-info" data-bs-toggle="dropdown" aria-expanded="false" onclick="this.blur();">Sign up</button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <form class="px-4 py-3" id="register" action="/register" method="POST">
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                                <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com" value="<%= typeof email != 'undefined' ? email : '' %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormEmail1" class="form-label">Name</label>
+                                <input type="name" name="name" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleDropdownFormPassword1" class="form-label">Repeat password</label>
+                                <input type="password" name="password2" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Register</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Main section -->
+    <section class="position-absolute top-50 start-50 translate-middle">
+        <div class="d-flex flex-column mb-3">
+            <div class="me-4">
+                <h2>Contact Me!</h2>
+                <p>Have questions about this app?<br />
+                Have exciting ideas about this project?<br />
+                Simply want to chat?<br />
+                You can find me active on any of the platforms below.</p>
+            </div>
+            <ul class="list-unstyled">
+                <li><a href="https://twitter.com/Hopeahh" class="bi bi-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="https://www.linkedin.com/in/irina-petrova-se/" class="icon fa-brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+                <li><a href="https://github.com/Hopeah" class="icon fa-brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="https://irinapetrova.dev" class="icon fa-solid alt fa-address-card"><span class="label">Portfolio</span></a></li>
+                <li><a href="mailto: irina@theluky.com" class="icon fa-solid alt fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+        </div>
+    </section>
+
+
     <!-- Banner -->
-    <section id="banner">
+    <!-- <section id="banner">
         <div class="content">
             <header>
                 <h2>Contact Me!</h2>
@@ -68,10 +119,10 @@
                 <li><a href="mailto: irina@theluky.com" class="icon fa-solid alt fa-envelope"><span class="label">Email</span></a></li>
             </ul>
         </div>
-    </section>
+    </section> -->
+
     <!-- Scripts -->
     <script src="js/main.js"></script>
-    <script src="js/dropdown.js"></script>
-    <script src="js/responsiveNavBar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
