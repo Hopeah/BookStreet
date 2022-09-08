@@ -3,10 +3,6 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport')
 
 module.exports = {
-    getRegistration: (req, res) => {
-        res.render('register.ejs')
-    },
-
     getUser: (req, res) => {
         const {name, email, password, password2} = req.body;
         let errors = []
@@ -28,7 +24,7 @@ module.exports = {
     
         //If there are any errors, re-render the page and display those
         if (errors.length > 0) {
-            res.render('register', {
+            res.render('front', {
                 errors,
                 name,
                 email,
@@ -42,7 +38,7 @@ module.exports = {
                     if (user) {
                         //User exists
                         errors.push({msg: 'Email is already registered'})
-                        res.render('register', {
+                        res.render('front', {
                             errors,
                             name,
                             email,

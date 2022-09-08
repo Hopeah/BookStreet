@@ -1,7 +1,7 @@
 
 <% if(locals.errors){ %> 
     <% errors.forEach(function(error) { %>
-        <div class="register error">
+        <div>
             <%= error.msg %>
         </div>
         <%=console.log(error.msg)%>
@@ -9,13 +9,13 @@
 <% } %> 
     
 <% if(success_msg != '') { %>
-    <div class="register success">
+    <div>
         <%= success_msg %>
     </div>
 <% } %>
 
 <% if(error != '') { %>
-    <div class="login error">
+    <div>
         <%= error %>
     </div>
 <% } %>

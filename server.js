@@ -4,6 +4,8 @@ const connectDB = require('./config/database')
 const flash = require('connect-flash')
 const session = require('express-session')
 const passport = require('passport')
+const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo')
 
 const frontRoutes = require ('./routes/front')
 const contactRoutes = require ('./routes/contact')
@@ -19,8 +21,9 @@ connectDB()
 app.use(
     session({
       secret: 'secret',
-      resave: true,
-      saveUninitialized: true
+      resave: false,
+      saveUninitialized: false,
+      store: MongoStore.create({ mongoUrl: process.env.DB_STRING })
     })
 )
 
