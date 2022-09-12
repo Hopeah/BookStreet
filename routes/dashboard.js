@@ -5,4 +5,6 @@ const { ensureAuthenticated } = require('../config/Auth')
 
 router.get('/', ensureAuthenticated, dashboardController.getDashboard) 
 
+router.post('/createDoc', ensureAuthenticated, dashboardController.createDoc)
+
 module.exports = router
