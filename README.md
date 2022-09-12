@@ -25,34 +25,31 @@
 
 ## Homepage
 
-1. User Welcome -> using a set name from user profile
+1. ~~User Welcome -> using a set name from user profile~~
 2. Reading Progress -> current documents being read are displayed with a progress bar (screen center?)
 3. Book Wishlist -> books that are on a wish list are displayed (screen left?)
 4. Read/Paused -> books that were completed/paused are displayed (screen right?)
 
 ## Reading documents
 
-1. Status -> marking every document based on the reading progress
-	1. Future Read
-	2. Active
-	3. Paused
-	4. Read
+1. ~~Status -> marking every document based on the reading progress~~
+	1. ~~Future Read~~
+	2. ~~Active~~
+	3. ~~Paused~~
+	4. ~~Read~~
 
 ## Properties
 
 Various document properties, full list can be viewed by clicking on it? Certain properties will be visible all the time (on homepage, lists?)
 
-1. Title -> always
-2. Author
-3. Genre
+1. ~~Title -> always~~
+2. ~~Author~~
+3. ~~Genre~~
 4. Links to download/get -> always
-5. Comments/Review/Notes -> a field that can be filled out
-6. Rating
-7. Type -> always 
-	1. Book
-	2. Article
-	3. Journal
-	4. Comics/Manga
+5. ~~Comments/Review/Notes -> a field that can be filled out~~
+6. ~~Rating~~
+7. CloudinaryID
+
 ## Reading lists
 
 1. Create lists -> lists could contain a limited? number of documents, contain the name of who it was created by
