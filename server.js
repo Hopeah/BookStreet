@@ -8,7 +8,6 @@ const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')
 
 const frontRoutes = require ('./routes/front')
-const contactRoutes = require ('./routes/contact')
 const registerRoutes = require('./routes/register')
 const dashboardRoutes = require('./routes/dashboard')
 
@@ -49,7 +48,6 @@ app.use(express.json())
 
 //Calling the routes
 app.use('/', frontRoutes)
-app.use('/contact', contactRoutes)
 app.use('/register', registerRoutes)
 app.use('/dashboard', dashboardRoutes)
 
