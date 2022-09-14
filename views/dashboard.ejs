@@ -61,7 +61,7 @@
         <label for="documents">Reading included in the list</label>
         <select name="documents" id="documents" multiple>
             <% docs.forEach(el => { %>
-            <option name="documents[]" value="<%= el._id %>, <%= el.title %>"> <%= el.title %> </option>
+            <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
             <% }) %>
         </select>
         <textarea name='description' placeholder="List Description"></textarea>
@@ -76,7 +76,11 @@
         </li>
         <li>
             <% for (let i=0; i < el.documents.length; i++) { %>
-            <span> <%= el.documents[i].split(', ')[1] %> </span>
+                <% docs.forEach(ele => { %>
+                    <% if (ele._id == el.documents[i].split(', ')[0]) { %>
+                        <span><%= ele.title %></span>
+                <%  } %>
+                <% }) %>
             <% } %>
         </li>
         <li>
