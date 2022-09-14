@@ -7,4 +7,6 @@ router.get('/', ensureAuthenticated, dashboardController.getDashboard)
 
 router.post('/createDoc', ensureAuthenticated, dashboardController.createDoc)
 
+router.post('/createList', ensureAuthenticated, dashboardController.createList)
+
 module.exports = router
