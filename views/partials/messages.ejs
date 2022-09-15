@@ -1,21 +1,24 @@
 
 <% if(locals.errors){ %> 
     <% errors.forEach(function(error) { %>
-        <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <%= error.msg %>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%=console.log(error.msg)%>
     <% }); %>
 <% } %> 
     
 <% if(success_msg != '') { %>
-    <div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         <%= success_msg %>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <% } %>
 
 <% if(error != '') { %>
-    <div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <%= error %>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <% } %>
