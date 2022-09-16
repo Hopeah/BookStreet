@@ -3,6 +3,7 @@ const app = express()
 const connectDB = require('./config/database')
 const flash = require('connect-flash')
 const session = require('express-session')
+const methodOverride = require("method-override");
 const passport = require('passport')
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')
@@ -45,6 +46,9 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
+//Use forms for put / delete
+app.use(methodOverride("_method"));
 
 //Calling the routes
 app.use('/', frontRoutes)

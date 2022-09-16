@@ -9,7 +9,14 @@ const ListSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-    //Need to add cloudinaryID
+  image: {
+    type: String,
+    require: true,
+  },
+  cloudinaryId: {
+    type: String,
+    require: true,
+  },
   description: {
     type: String,
     required: false,

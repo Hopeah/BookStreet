@@ -5,7 +5,14 @@ const DocSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-    //Need to add cloudinaryID
+  image: {
+    type: String,
+    require: true,
+  },
+  cloudinaryId: {
+    type: String,
+    require: true,
+  },
   author: {
     type: String,
     required: false,
