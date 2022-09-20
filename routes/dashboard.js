@@ -6,6 +6,8 @@ const { ensureAuthenticated } = require('../config/Auth')
 
 router.get('/', ensureAuthenticated, dashboardController.getDashboard) 
 
+router.put('/updateAvatar', ensureAuthenticated, upload.single("avatar"), dashboardController.updateAvatar)
+
 router.post('/createDoc', ensureAuthenticated, upload.single("file"), dashboardController.createDoc)
 
 router.post('/createList', ensureAuthenticated, upload.single("file"), dashboardController.createList)

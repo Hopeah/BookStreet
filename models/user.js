@@ -13,6 +13,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+    require: false,
+  },
+  cloudinaryId: {
+    type: String,
+    require: false,
+  },
   date: {
     type: Date,
     default: Date.now
