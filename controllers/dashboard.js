@@ -1,13 +1,14 @@
 const cloudinary = require("../middleware/cloudinary");
 const doc = require('../models/document')
 const list = require('../models/list')
+const User = require('../models/user')
 
 module.exports = {
     getDashboard: async (req,res) => {
         try {
             const docItems = await doc.find({userId: req.user.id})
             const listItems = await list.find({userID: req.user.id})
-            res.render('dashboard.ejs', {docs: docItems, lists: listItems, name: req.user.name})
+            res.render('dashboard.ejs', {docs: docItems, lists: listItems, name: req.user.name, avatar: req.user.avatar})
         } catch (err) {
             console.log(err)
         }
@@ -52,5 +53,30 @@ module.exports = {
         } catch (err) {
             console.log(err)
         }
-    }
+    },
+
+    updateAvatar: async (req, res) => {
+        try {
+            // Delete image from cloudinary
+            if (req.user.cloudinaryId) {
+                await cloudinary.uploader.destroy(req.user.cloudinaryId);
+            }
+            // Upload image to cloudinary
+            const result = await cloudinary.uploader.upload(req.file.path);
+
+            await User.findOneAndUpdate(
+                {
+                    _id: req.user.id
+                },
+                {
+                    avatar: result.secure_url,
+                    cloudinaryId: result.public_id,
+                }
+            )
+
+            res.redirect('/dashboard')
+        } catch (err) {
+            console.log(err)
+        }
+    },
 }

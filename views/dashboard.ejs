@@ -20,6 +20,17 @@
 
 
     <h1>Welcome, <%= name %>!</h1>
+    <% if (!avatar) { %>
+    <img src="/images/avatar.png" alt="avatar image">
+    <% } else if (avatar) { %>
+    <img src="<%=avatar%>" alt="avatar image">
+    <% } %>
+
+    <form action="/dashboard/updateAvatar?_method=PUT" enctype="multipart/form-data" method='POST'>
+        <label for="avatar">Update Avatar</label>
+        <input type="file" id="avatar" name="avatar">
+        <input type="submit">
+    </form>
 
     <h2>Reading entry</h2>
     <form action="/dashboard/createDoc" enctype="multipart/form-data" method='POST'>
