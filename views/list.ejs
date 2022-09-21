@@ -20,17 +20,22 @@
 
 
     <h1><%= list.name %>!</h1>
+
+    <h2>Created by</h2>
+    <span><%=user.name%></span>
     <% if (!user.avatar) { %>
     <img src="/images/avatar.png" alt="avatar image">
     <% } else if (user.avatar) { %>
-    <img src="<%=avatar%>" alt="avatar image">
+    <img src="<%=user.avatar%>" alt="avatar image">
     <% } %>
 
     <span><%= list.description %></span>
 
     <% for (let i=0; i < list.documents.length; i++) { %>
         <% docs.forEach(ele => { %>
-            <span><%= ele.title %></span>
+            <% if (ele._id == list.documents[i].split(', ')[0]) { %>
+                <span><%= ele.title %></span>
+            <%  } %>
         <% }) %>
     <% } %>
 
