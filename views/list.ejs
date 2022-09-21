@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= list.name %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid m-2">
+            <a href="/" class="navbar-brand">Project0</a>
+
+            <a href="/register/logout">Logout</a>
+        </div>
+    </nav>
+
+
+    <h1><%= list.name %>!</h1>
+
+    <h2>Created by</h2>
+    <span><%=user.name%></span>
+    <% if (!user.avatar) { %>
+    <img src="/images/avatar.png" alt="avatar image">
+    <% } else if (user.avatar) { %>
+    <img src="<%=user.avatar%>" alt="avatar image">
+    <% } %>
+
+    <span><%= list.description %></span>
+
+    <% for (let i=0; i < list.documents.length; i++) { %>
+        <% docs.forEach(ele => { %>
+            <% if (ele._id == list.documents[i].split(', ')[0]) { %>
+                <span><%= ele.title %></span>
+            <%  } %>
+        <% }) %>
+    <% } %>
+
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

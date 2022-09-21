@@ -71,7 +71,7 @@
     <% }) %>
 
     <h2>List entry</h2>
-    <form action="/dashboard/createList" method="POST">
+    <form action="/dashboard/createList" enctype="multipart/form-data" method="POST">
         <input type="text" placeholder="List Name" name="name">
         <label for="documents">Reading included in the list</label>
         <select name="documents" id="documents" multiple>
@@ -88,7 +88,7 @@
     <% lists.forEach(el => { %>
     <ul>
         <li>
-            <span> <%= el.name %> </span>
+            <a href="/post/list/<%= el._id %>"><%= el.name %></a>
         </li>
         <li>
             <% for (let i=0; i < el.documents.length; i++) { %>

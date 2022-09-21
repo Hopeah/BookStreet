@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo')
 const frontRoutes = require ('./routes/front')
 const registerRoutes = require('./routes/register')
 const dashboardRoutes = require('./routes/dashboard')
+const postRoutes = require('./routes/post')
 
 require('dotenv').config({path: './config/.env'})
 require('./config/passport')(passport);
@@ -54,6 +55,7 @@ app.use(methodOverride("_method"));
 app.use('/', frontRoutes)
 app.use('/register', registerRoutes)
 app.use('/dashboard', dashboardRoutes)
+app.use('/post', postRoutes)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`)
