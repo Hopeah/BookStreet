@@ -88,7 +88,7 @@
     <% lists.forEach(el => { %>
     <ul>
         <li>
-            <span> <%= el.name %> </span>
+            <a href="/post/list/<%= el._id %>"><%= el.name %></a>
         </li>
         <li>
             <% for (let i=0; i < el.documents.length; i++) { %>
