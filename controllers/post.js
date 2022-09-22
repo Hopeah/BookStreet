@@ -12,4 +12,40 @@ module.exports = {
           console.log(err);
         }
     },
+
+    deleteList: async (req, res) => {
+      try {
+        // Find post by id
+        let list = await List.findById({ _id: req.params.id });
+        console.log(`list`)
+        // Delete image from cloudinary
+        if (list.cloudinaryId) {
+          await cloudinary.uploader.destroy(list.cloudinaryId);
+        }
+        // Delete post from db
+        await List.deleteOne({ _id: req.params.id });
+        console.log("Deleted List");
+        res.redirect("/dashboard");
+      } catch (err) {
+        res.redirect("/dashboard");
+      }
+    },
+
+    deleteDoc: async (req, res) => {
+      try {
+        // Find post by id
+        let doc = await Doc.findById({ _id: req.params.id });
+        console.log(`doc`)
+        // Delete image from cloudinary
+        if (doc.cloudinaryId) {
+          await cloudinary.uploader.destroy(doc.cloudinaryId);
+        }
+        // Delete post from db
+        await Doc.deleteOne({ _id: req.params.id });
+        console.log("Deleted Doc");
+        res.redirect("/dashboard");
+      } catch (err) {
+        res.redirect("/dashboard");
+      }
+    },
 }

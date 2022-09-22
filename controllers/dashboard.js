@@ -14,6 +14,15 @@ module.exports = {
         }
     },
 
+    getFeed: async (req, res) => {
+        try {
+          const lists = await list.find().sort({ createdAt: "desc" }).lean();
+          res.render("feed.ejs", { lists: lists, user: req.user });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+
     createDoc: async (req, res) => {
         try {
             // Upload image to cloudinary
