@@ -11,7 +11,7 @@
 3. Successful registration email -> find a template somewhere?
 4. ~~Password storage/reminder? -> encryption?~~
 5. ~~User profile -> a separate page with fields below~~
-	1. ~~Name (change) -> empty or pre-generated first? ~~
+	1. ~~Name (change) -> empty or pre-generated first?~~
 	2. ~~Avatar (change) -> get from google if google auth, ability to upload one~~
 	3. ~~Email (change) -> get from registration~~
 	4. ~~Password (change) -> hide behind stars, changing requires email code~~
@@ -45,16 +45,16 @@ Various document properties, full list can be viewed by clicking on it? Certain 
 1. ~~Title -> always~~
 2. ~~Author~~
 3. ~~Genre~~
-4. Links to download/get -> always
+4. ~~Links to download/get -> always~~
 5. ~~Comments/Review/Notes -> a field that can be filled out~~
 6. ~~Rating~~
-7. CloudinaryID
+7. ~~CloudinaryID~~
 
 ## Reading lists
 
-1. Create lists -> lists could contain a limited? number of documents, contain the name of who it was created by
-2. Delete lists -> list owner can delete a list
-3. List sharing -> a list can be freely shared by anyone with a link, ability to clone a list to become an owner of a copy
+1. ~~Create lists -> lists could contain a limited? number of documents, contain the name of who it was created by~~
+2. ~~Delete lists -> list owner can delete a list~~
+3. ~~List sharing -> a list can be freely shared by anyone with a link, ability to clone a list to become an owner of a copy~~
 
 ## Bonus…
 
