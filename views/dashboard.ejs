@@ -32,27 +32,45 @@
         <input type="submit">
     </form>
 
-    <h2>Reading entry</h2>
-    <form action="/dashboard/createDoc" enctype="multipart/form-data" method='POST'>
-        <input type="text" placeholder="Title" name='title'>
-        <input type="text" placeholder="Author(s)" name='author'>
-        <input type="text" placeholder="Genre" name='genre'>
-        <label for="status">Reading status:</label>
-        <select name="status" id="status">
-            <option name="status" value="Active">Active</option>
-            <option name="status" value="Paused">Paused</option>
-            <option name="status" value="Finished">Finished</option>
-            <option name="status" value="Future">Future</option>
-        </select>
-        <input type="text" placeholder="Link" name='link'>
-        <textarea name='notes' placeholder="Place for your comments/review/notes"></textarea>
-        <label for="rating">Rating (1 being the worst, 5 being the best)</label>
-        <input type="number" id="rating" name='rating' min="1" max="5">
-        <input type="file" name="file">
-        <input type="submit">
-    </form>
+    <!-- Adding a document (reading) -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDoc">
+        Add a literature entry
+    </button>
+      
+    <div class="modal fade" id="addDoc" tabindex="-1" aria-labelledby="addDocLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDocLabel">Reading Information</h5>
+            </div>
+            <div class="modal-body">
+                <form action="/dashboard/createDoc" id="addingDoc" enctype="multipart/form-data" method='POST'>
+                    <input type="text" placeholder="Title" name='title'>
+                    <input type="text" placeholder="Author(s)" name='author'>
+                    <input type="text" placeholder="Genre" name='genre'>
+                    <label for="status">Reading status:</label>
+                    <select name="status" id="status">
+                        <option name="status" value="Active">Active</option>
+                        <option name="status" value="Paused">Paused</option>
+                        <option name="status" value="Finished">Finished</option>
+                        <option name="status" value="Future">Future</option>
+                    </select>
+                    <input type="text" placeholder="Link" name='link'>
+                    <textarea name='notes' placeholder="Place for your comments/review/notes"></textarea>
+                    <label for="rating">Rating (1 being the worst, 5 being the best)</label>
+                    <input type="number" id="rating" name='rating' min="1" max="5">
+                    <input type="file" name="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
+                <button type="submit" form="addingDoc" class="btn btn-primary" data-bs-dismiss="modal">Add to my readings</button>
+            </div>
+            </div>
+        </div>
+    </div>
 
-    <h2>Reading list</h2>
+    <h2>Literature list</h2>
     <% docs.forEach(el => { %>
     <ul>
         <li>
@@ -69,25 +87,43 @@
         </li>
         <li>
             <form action="/post/deleteDoc/<%= el.id %>?_method=DELETE" method="POST">
-            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
             </form>
         </li>
     </ul>
     <% }) %>
 
-    <h2>List entry</h2>
-    <form action="/dashboard/createList" enctype="multipart/form-data" method="POST">
-        <input type="text" placeholder="List Name" name="name">
-        <label for="documents">Reading included in the list</label>
-        <select name="documents" id="documents" multiple>
-            <% docs.forEach(el => { %>
-            <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
-            <% }) %>
-        </select>
-        <textarea name='description' placeholder="List Description"></textarea>
-        <input type="file" name="file">
-        <input type="submit">
-    </form>
+    <!-- Adding a list (of documents/readings) -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addList">
+        Create a list of my literature
+    </button>
+      
+    <div class="modal fade" id="addList" tabindex="-1" aria-labelledby="addListLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addListLabel">List Information</h5>
+            </div>
+            <div class="modal-body">
+                <form action="/dashboard/createList" id="addingList" enctype="multipart/form-data" method="POST">
+                    <input type="text" placeholder="List Name" name="name">
+                    <label for="documents">Literature included in the list</label>
+                    <select name="documents" id="documents" multiple>
+                        <% docs.forEach(el => { %>
+                        <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
+                        <% }) %>
+                    </select>
+                    <textarea name='description' placeholder="List Description"></textarea>
+                    <input type="file" name="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
+                <button type="submit" form="addingList" class="btn btn-primary" data-bs-dismiss="modal">Add to my lists</button>
+            </div>
+            </div>
+        </div>
+    </div>
 
     <h2>List of lists</h2>
     <% lists.forEach(el => { %>
@@ -109,7 +145,7 @@
         </li>
         <li>
             <form action="/post/deleteList/<%= el.id %>?_method=DELETE" method="POST">
-            <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
             </form>
         </li>
     </ul>
