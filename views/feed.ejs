@@ -14,13 +14,13 @@
         <div class="container-fluid m-2">
             <a href="/" class="navbar-brand">Project0</a>
 
-            <a href="/register/logout">Logout</a>
+            <button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button>
         </div>
     </nav>
 
     <% for(let i=0; i < lists.length; i++) { %>
         <div>
-            <a href="/post/list/<%= lists[i]._id %>">
+            <a href="/post/list/<%= lists[i]._id %>" class="text-decoration-none link-light">
                 <%= lists[i].name %>
                 <% if (lists[i].image) { %>
                     <img src="<%= lists[i].image %>" alt="">
@@ -37,7 +37,7 @@
     <% } %>
 
     <div>
-        <a href="/dashboard">Return to Dashboard</a>
+        <button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">Return to Dashboard</a></button>
     </div>
 
     <script src="js/main.js"></script>
