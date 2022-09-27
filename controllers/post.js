@@ -25,9 +25,9 @@ module.exports = {
         // Delete post from db
         await List.deleteOne({ _id: req.params.id });
         console.log("Deleted List");
-        res.redirect("/dashboard");
+        res.redirect('/dashboard/lists');
       } catch (err) {
-        res.redirect("/dashboard");
+        res.redirect('/dashboard/lists');
       }
     },
 
@@ -43,9 +43,9 @@ module.exports = {
         // Delete post from db
         await Doc.deleteOne({ _id: req.params.id });
         console.log("Deleted Doc");
-        res.redirect("/dashboard");
+        res.redirect('/dashboard/literature');
       } catch (err) {
-        res.redirect("/dashboard");
+        res.redirect('/dashboard/literature');
       }
     },
 }

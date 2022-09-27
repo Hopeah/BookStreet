@@ -17,6 +17,7 @@ a, .span-link {
 }
 a:hover, .span-link:hover {
 	color: #7fc29b;
+	cursor: pointer;
 }
 
 p {
@@ -58,4 +59,37 @@ h5 {
 h6 {
     font-size: 0.7em;
     line-height: 1.5em;
+}
+
+.small-avatar {
+	width: 60px;
+    height: 60px;
+    -webkit-border-radius: 60px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 60px;
+    -moz-background-clip: padding;
+    border-radius: 60px;
+    background-clip: padding-box;
+    margin: 7px 0 0 5px;
+	background-size: cover;
+    background-position: center center;
+}
+
+.medium-avatar {
+	width: 200px;
+    height: 200px;
+    -webkit-border-radius: 150px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 150px;
+    -moz-background-clip: padding;
+    border-radius: 200px;
+    background-clip: padding-box;
+    margin: 7px 0 0 5px;
+	background-size: cover;
+    background-position: center center;
+}
+
+.medium-image {
+	max-width: 400px;
+	height: auto;
 }

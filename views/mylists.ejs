@@ -82,14 +82,14 @@
             <% lists.forEach(el => { %>
             <ul class="list-unstyled row">
                 <li class="col-3">
-                    <a href="/post/<%= el._id %>" class=""><%= el.name %></a>
+                    <a href="/post/<%= el._id %>"><%= el.name %></a>
                 </li>
                 <li class="col-5">
                     <span> <%= el.description %> </span>
                 </li>
                 <li class="col-1">
-                    <form action="/post/deleteList/<%= el.id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
+                    <form action="/post/deleteList/<%= el._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
                     </form>
                 </li>
             </ul>

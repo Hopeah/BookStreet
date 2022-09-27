@@ -96,7 +96,7 @@
                               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <img src="<%= el.image %>" >
+                                <img class="img-fluid" src="<%= el.image %>" >
                                 <span> <%= el.author %> </span>
                                 <span> <%= el.status %> </span>
                                 <span> <%= el.genre %> </span>
@@ -112,7 +112,7 @@
                     <span> <%= el.status %> </span>
                 </li>
                 <li class="col-1">
-                    <form action="/post/deleteDoc/<%= el.id %>?_method=DELETE" method="POST">
+                    <form action="/post/deleteDoc/<%= el._id %>?_method=DELETE" method="POST">
                     <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
                     </form>
                 </li>
