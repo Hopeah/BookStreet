@@ -6,8 +6,8 @@ const User = require('../models/user')
 module.exports = {
     getDashboard: async (req,res) => {
         try {
-            const docItems = await doc.find({userId: req.user.id})
-            const listItems = await list.find({userID: req.user.id})
+            const docItems = await doc.find({userId: req.user.id}).lean()
+            const listItems = await list.find({userID: req.user.id}).lean()
             res.render('dashboard.ejs', {docs: docItems, lists: listItems, name: req.user.name, avatar: req.user.avatar})
         } catch (err) {
             console.log(err)
@@ -16,12 +16,31 @@ module.exports = {
 
     getFeed: async (req, res) => {
         try {
-          const lists = await list.find().sort({ createdAt: "desc" }).lean();
-          res.render("feed.ejs", { lists: lists, user: req.user });
+            const lists = await list.find().sort({ createdAt: "desc" }).lean();
+            res.render("feed.ejs", { lists: lists, user: req.user });
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
-      },
+    },
+
+    getLiterature: async (req, res) => {
+        try {
+            const docItems = await doc.find({userId: req.user.id}).lean()
+            res.render("literature.ejs", {docs: docItems, name: req.user.name, avatar: req.user.avatar});
+        } catch (err) {
+            console.log(err);
+        }
+    },
+
+    getLists: async (req, res) => {
+        try {
+            const docItems = await doc.find({userId: req.user.id}).lean()
+            const listItems = await list.find({userID: req.user.id}).lean()
+            res.render("mylists.ejs", {docs: docItems, lists: listItems, name: req.user.name, avatar: req.user.avatar});
+        } catch (err) {
+            console.log(err);
+        }
+    },
 
     createDoc: async (req, res) => {
         try {
@@ -39,7 +58,7 @@ module.exports = {
                 status: req.body.status,
                 rating: req.body.rating
             })
-            res.redirect('/dashboard')
+            res.redirect('/dashboard/literature')
         } catch (err) {
             console.log(err)
         }
@@ -58,7 +77,7 @@ module.exports = {
                 description: req.body.description,
                 user: req.user.id
             })
-            res.redirect('/dashboard')
+            res.redirect('/dashboard/lists')
         } catch (err) {
             console.log(err)
         }

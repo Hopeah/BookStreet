@@ -14,7 +14,18 @@
         <div class="container-fluid m-2">
             <a href="/" class="navbar-brand">Project0</a>
 
-            <a href="/register/logout">Logout</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -60,14 +71,6 @@
     <% } %>
 
     <img src="<%= list.image %>">
-
-    <div>
-        <button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Return to Feed</a></button>
-    </div>
-
-    <div>
-        <button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">Return to Dashboard</a></button>
-    </div>
 
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

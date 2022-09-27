@@ -7,6 +7,7 @@
     <title><%= name %>'s Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="bg-dark text-light">
 
@@ -14,12 +15,23 @@
         <div class="container-fluid m-2">
             <a href="/" class="navbar-brand">Project0</a>
 
-            <button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col">
             <div>
                 <h1>Welcome, <%= name %>!</h1>
                 <% if (!avatar) { %>
@@ -109,12 +121,32 @@
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col">
             <h2>Literature list</h2>
+            <!-- <table class="table text-white">
+                <thead>
+                  <tr>
+                    <th scope="col-5" class="fw-normal">Literature Title</th>
+                    <th scope="col-3" class="fw-normal">Status</th>
+                    <th scope="col-1" class="fw-normal">Delete</th>
+                  </tr>
+                </thead>
+            </table> -->
+            <ul class="list-unstyled row"> 
+                <li class="col-5">
+                    <span>Title</span>
+                </li>
+                <li class="col-3">
+                    <span>Status</span>
+                </li>
+                <li class="col-1">
+                    <span>Delete</span>
+                </li>
+            </ul>
             <% docs.forEach((el, index) => { %>
-            <ul class="list-unstyled">
-                <li>
-                    <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>"> <%= el.title %> </span>
+            <ul class="list-unstyled row">
+                <li class="col-5">
+                    <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link"> <%= el.title %> </span>
                     <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content bg-dark">
@@ -135,25 +167,23 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="col-3">
                     <span> <%= el.status %> </span>
                 </li>
-                <li>
-                    <span> <%= el.notes %> </span>
-                </li>
-                <li>
+                <li class="col-1">
                     <form action="/post/deleteDoc/<%= el.id %>?_method=DELETE" method="POST">
                     <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
                     </form>
                 </li>
             </ul>
             <% }) %>
-
+        </div>
+        <div class="col">
             <h2>List of lists</h2>
             <% lists.forEach(el => { %>
             <ul class="list-unstyled">
                 <li>
-                    <a href="/post/list/<%= el._id %>" class="text-decoration-none link-light"><%= el.name %></a>
+                    <a href="/post/<%= el._id %>" class=""><%= el.name %></a>
                 </li>
                 <!-- <li>
                     <% for (let i=0; i < el.documents.length; i++) { %>
