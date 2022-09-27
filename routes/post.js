@@ -4,7 +4,7 @@ const postController = require("../controllers/post");
 const { ensureAuthenticated } = require('../config/Auth')
 
 //Post Routes - simplified for now
-router.get("/list/:id", postController.getList);
+router.get("/:id", postController.getList);
 
 router.delete("/deleteDoc/:id", postController.deleteDoc);
 

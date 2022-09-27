@@ -8,6 +8,10 @@ router.get('/', ensureAuthenticated, dashboardController.getDashboard)
 
 router.get('/feed', dashboardController.getFeed)
 
+router.get('/literature', dashboardController.getLiterature)
+
+router.get('/lists', dashboardController.getLists)
+
 router.put('/updateAvatar', ensureAuthenticated, upload.single("avatar"), dashboardController.updateAvatar)
 
 router.post('/createDoc', ensureAuthenticated, upload.single("file"), dashboardController.createDoc)

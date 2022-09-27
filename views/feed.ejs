@@ -7,6 +7,7 @@
     <title>Feed</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="bg-dark text-light">
 
@@ -14,30 +15,41 @@
         <div class="container-fluid m-2">
             <a href="/" class="navbar-brand">Project0</a>
 
-            <button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                </ul>
+            </div>
         </div>
     </nav>
-
-    <% for(let i=0; i < lists.length; i++) { %>
-        <div>
-            <a href="/post/list/<%= lists[i]._id %>" class="text-decoration-none link-light">
-                <%= lists[i].name %>
-                <% if (lists[i].image) { %>
-                    <img src="<%= lists[i].image %>" alt="">
-                <% } %>
-            </a>
-            <h2>Created by</h2>
-            <span><%=user.name%></span>
-            <% if (!user.avatar) { %>
-            <img src="/images/avatar.png" alt="avatar image">
-            <% } else if (user.avatar) { %>
-            <img src="<%=user.avatar%>" alt="avatar image">
-            <% } %>
-        </div>
-    <% } %>
-
-    <div>
-        <button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">Return to Dashboard</a></button>
+    <div class="d-flex flex-nowrap">
+        <% for(let i=0; i < lists.length; i++) { %>
+            <div class="border border-secondary m-3 p-3">
+                <div>
+                    <a href="/post/<%= lists[i]._id %>" class="d-flex flex-column align-items-center">
+                        <%= lists[i].name %>
+                        <% if (lists[i].image) { %>
+                            <div><img class="medium-image" src="<%= lists[i].image %>" alt=""></div>
+                        <% } %>
+                    </a>
+                </div>
+                <div class="d-flex flex-row align-items-center">
+                    <span>Created by <%=user.name%></span>
+                    <% if (!user.avatar) { %>
+                        <div class="small-avatar" style="background-image: url(/images/avatar.png)"></div>
+                        <% } else if (user.avatar) { %>
+                        <div class="small-avatar" style="background-image: url(<%=user.avatar%>)"></div>
+                        <% } %>
+                </div>
+            </div>
+        <% } %>
     </div>
 
     <script src="js/main.js"></script>

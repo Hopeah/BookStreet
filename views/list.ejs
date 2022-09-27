@@ -7,6 +7,7 @@
     <title><%= list.name %></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="bg-dark text-light">
 
@@ -14,28 +15,52 @@
         <div class="container-fluid m-2">
             <a href="/" class="navbar-brand">Project0</a>
 
-            <a href="/register/logout">Logout</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <h1><%= list.name %>!</h1>
 
-    <h1><%= list.name %>!</h1>
-
-    <h2>Created by</h2>
-    <span><%=user.name%></span>
-    <% if (!user.avatar) { %>
-    <img src="/images/avatar.png" alt="avatar image">
-    <% } else if (user.avatar) { %>
-    <img src="<%=user.avatar%>" alt="avatar image">
-    <% } %>
-
-    <span><%= list.description %></span>
+        <div>
+            <div><img class="img-fluid" src="<%= list.image %>"></div>
+        
+    
+            <span><%= list.description %></span>
+        </div>
+        
+        <% for (let i=0; i < list.documents.length; i++) { %>
+            <% docs.forEach((ele, index) => { %>
+                <% if (ele._id == list.documents[i].split(', ')[0]) { %>
+                    <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link"> <%= ele.title %> </span>
+                <%  } %>
+            <% }) %>
+        <% } %>
+        
+        <div class="d-flex flex-row align-items-center">
+            <span>Created by <%=user.name%></span>
+            <% if (!user.avatar) { %>
+                <div class="medium-avatar" style="background-image: url(/images/avatar.png)"></div>
+            <% } else if (user.avatar) { %>
+                <div class="medium-avatar" style="background-image: url(<%=user.avatar%>)"></div>
+            <% } %>
+        </div>
+    </div>
 
     <% for (let i=0; i < list.documents.length; i++) { %>
         <% docs.forEach((ele, index) => { %>
             <% if (ele._id == list.documents[i].split(', ')[0]) { %>
-                <!-- <span><%= ele.title %></span> -->
-                <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>"> <%= ele.title %> </span>
                     <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content bg-dark">
@@ -44,7 +69,7 @@
                               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <img src="<%= ele.image %>" >
+                                <img class="img-fluid" src="<%= ele.image %>" >
                                 <span> <%= ele.author %> </span>
                                 <span> <%= ele.status %> </span>
                                 <span> <%= ele.genre %> </span>
@@ -58,16 +83,6 @@
             <%  } %>
         <% }) %>
     <% } %>
-
-    <img src="<%= list.image %>">
-
-    <div>
-        <button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Return to Feed</a></button>
-    </div>
-
-    <div>
-        <button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">Return to Dashboard</a></button>
-    </div>
 
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

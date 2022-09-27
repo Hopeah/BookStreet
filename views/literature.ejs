@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= name %>'s Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid m-2">
+            <a href="/" class="navbar-brand">Project0</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row container">
+
+        <div class="d-flex flex-row">
+            <h2 class="me-2">Literature list</h2>
+
+            <!-- Adding a document (reading) -->
+            <a href="#" class="bi bi-plus-circle h-25" role="button" data-bs-toggle="modal" data-bs-target="#addDoc"></a>
+        </div>
+            
+        <div class="modal fade" id="addDoc" tabindex="-1" aria-labelledby="addDocLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDocLabel">Reading Information</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/dashboard/createDoc" id="addingDoc" enctype="multipart/form-data" method='POST'>
+                            <input class="bg-dark" type="text" placeholder="Title" name='title'>
+                            <input class="bg-dark" type="text" placeholder="Author(s)" name='author'>
+                            <input class="bg-dark" type="text" placeholder="Genre" name='genre'>
+                            <label for="status">Reading status:</label>
+                            <select class="bg-dark" name="status" id="status">
+                                <option name="status" value="Active">Active</option>
+                                <option name="status" value="Paused">Paused</option>
+                                <option name="status" value="Finished">Finished</option>
+                                <option name="status" value="Future">Future</option>
+                            </select>
+                            <input class="bg-dark" type="text" placeholder="Link" name='link'>
+                            <textarea class="bg-dark" name='notes' placeholder="Place for your comments/review/notes"></textarea>
+                            <label for="rating">Rating (1 being the worst, 5 being the best)</label>
+                            <input class="bg-dark" type="number" id="rating" name='rating' min="1" max="5">
+                            <input class="bg-dark" class="form-control" type="file" name="file" id="formFile">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
+                        <button type="submit" form="addingDoc" class="btn btn-primary" data-bs-dismiss="modal">Add to my readings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <ul class="list-unstyled row"> 
+                <li class="col-3">
+                    <span>Title</span>
+                </li>
+                <li class="col-3">
+                    <span>Status</span>
+                </li>
+                <li class="col-1">
+                    <span>Delete</span>
+                </li>
+            </ul>
+            <% docs.forEach((el, index) => { %>
+            <ul class="list-unstyled row">
+                <li class="col-3">
+                    <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link"> <%= el.title %> </span>
+                    <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content bg-dark">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="docLabel-<%= index %>"><%= el.title %></h5>
+                              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img class="img-fluid" src="<%= el.image %>" >
+                                <span> <%= el.author %> </span>
+                                <span> <%= el.status %> </span>
+                                <span> <%= el.genre %> </span>
+                                <span> <%= el.notes %> </span>
+                                <span> <%= el.rating %> </span>
+                                <a href="<%= el.link %>" class="text-decoration-none link-light" target=”_blank”>Get</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="col-3">
+                    <span> <%= el.status %> </span>
+                </li>
+                <li class="col-1">
+                    <form action="/post/deleteDoc/<%= el._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
+                    </form>
+                </li>
+            </ul>
+            <% }) %>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
