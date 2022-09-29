@@ -31,51 +31,54 @@
     </nav>
 
     <div class="position-absolute top-50 start-50 translate-middle">
-        <h1><%= list.name %>!</h1>
+        <div class="d-flex flex-column align-items-center">
+            <h1><%= list.name %>!</h1>
 
-        <div>
-            <div><img class="img-fluid" src="<%= list.image %>"></div>
+            
+            <img class="img-fluid mb-3" src="<%= list.image %>">
         
     
-            <span><%= list.description %></span>
-        </div>
-        
-        <% for (let i=0; i < list.documents.length; i++) { %>
-            <% docs.forEach((ele, index) => { %>
-                <% if (ele._id == list.documents[i].split(', ')[0]) { %>
-                    <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link"> <%= ele.title %> </span>
-                <%  } %>
-            <% }) %>
-        <% } %>
-        
-        <div class="d-flex flex-row align-items-center">
-            <span>Created by <%=user.name%></span>
-            <% if (!user.avatar) { %>
-                <div class="medium-avatar" style="background-image: url(/images/avatar.png)"></div>
-            <% } else if (user.avatar) { %>
-                <div class="medium-avatar" style="background-image: url(<%=user.avatar%>)"></div>
+            <span class="mb-3"><%= list.description %></span>
+            
+            
+            <% for (let i=0; i < list.documents.length; i++) { %>
+                <% docs.forEach((ele, index) => { %>
+                    <% if (ele._id == list.documents[i].split(', ')[0]) { %>
+                        <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link mb-3"> <%= ele.title %> </span>
+                    <%  } %>
+                <% }) %>
             <% } %>
+            
+            <div class="d-flex flex-row align-items-center">
+                <span>Created by <%=user.name%></span>
+                <% if (!user.avatar) { %>
+                    <div class="medium-avatar" style="background-image: url(/images/avatar.png)"></div>
+                <% } else if (user.avatar) { %>
+                    <div class="medium-avatar" style="background-image: url(<%=user.avatar%>)"></div>
+                <% } %>
+            </div>
         </div>
+        
     </div>
 
     <% for (let i=0; i < list.documents.length; i++) { %>
-        <% docs.forEach((ele, index) => { %>
-            <% if (ele._id == list.documents[i].split(', ')[0]) { %>
+        <% docs.forEach((el, index) => { %>
+            <% if (el._id == list.documents[i].split(', ')[0]) { %>
                     <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content bg-dark">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="docLabel-<%= index %>"><%= ele.title %></h5>
+                              <h3 class="modal-title" id="docLabel-<%= index %>"><%= el.title %></h3>
                               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <img class="img-fluid" src="<%= ele.image %>" >
-                                <span> <%= ele.author %> </span>
-                                <span> <%= ele.status %> </span>
-                                <span> <%= ele.genre %> </span>
-                                <span> <%= ele.notes %> </span>
-                                <span> <%= ele.rating %> </span>
-                                <a href="<%= ele.link %>" class="text-decoration-none link-light" target=”_blank”>Get</a>
+                            <div class="modal-body d-flex flex-column align-items-center">
+                                <img class="img-fluid mb-1" src="<%= el.image %>" >
+                                <span>Written by <%= el.author %> </span>
+                                <span>Current status: <%= el.status %> </span>
+                                <span>Genre: <%= el.genre %> </span>
+                                <span>Notes: <%= el.notes %> </span>
+                                <span>Rating: <%= el.rating %> </span>
+                                <span>Where to get: <a href="<%= el.link %>" class="text-decoration-none link-light" target=”_blank”>Get</a></span>
                             </div>
                           </div>
                         </div>

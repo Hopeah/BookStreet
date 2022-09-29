@@ -47,16 +47,17 @@
                             <h5 class="modal-title" id="addListLabel">List Information</h5>
                         </div>
                         <div class="modal-body">
-                            <form action="/dashboard/createList" id="addingList" enctype="multipart/form-data" method="POST">
-                                <input class="bg-dark" type="text" placeholder="List Name" name="name">
-                                <label for="documents">Literature included in the list</label>
+                            <form action="/dashboard/createList" id="addingList" class="d-flex flex-column" enctype="multipart/form-data" method="POST">
+                                <input class="bg-dark" type="text" placeholder="List Name*" name="name">
+                                <label for="documents">Literature included in the list*</label>
                                 <select class="bg-dark" name="documents" id="documents" multiple>
                                     <% docs.forEach(el => { %>
                                     <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
                                     <% }) %>
                                 </select>
                                 <textarea class="bg-dark" name='description' placeholder="List Description"></textarea>
-                                <input class="bg-dark" type="file" name="file">
+                                <label for="formFile">Cover/image*:</label>
+                                <input class="bg-dark" type="file" name="file" id="formFile">
                             </form>
                         </div>
                         <div class="modal-footer">
