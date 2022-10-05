@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Libraries</a></button></li>
                     <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
                     <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
                 </ul>
@@ -34,7 +34,7 @@
 
         <div class="col">
             <div class="d-flex flex-row">
-                <h2 class="me-2">Lists</h2>
+                <h2 class="me-2">Libraries</h2>
 
                 <!-- Adding a list (of documents/readings) -->
                 <a href="#" class="bi bi-plus-circle h-25" role="button" data-bs-toggle="modal" data-bs-target="#addList"></a>
@@ -47,16 +47,17 @@
                             <h5 class="modal-title" id="addListLabel">List Information</h5>
                         </div>
                         <div class="modal-body">
-                            <form action="/dashboard/createList" id="addingList" enctype="multipart/form-data" method="POST">
-                                <input class="bg-dark" type="text" placeholder="List Name" name="name">
-                                <label for="documents">Literature included in the list</label>
+                            <form action="/dashboard/createList" id="addingList" class="d-flex flex-column" enctype="multipart/form-data" method="POST">
+                                <input class="bg-dark" type="text" placeholder="List Name*" name="name">
+                                <label for="documents">Literature included in the list*</label>
                                 <select class="bg-dark" name="documents" id="documents" multiple>
                                     <% docs.forEach(el => { %>
                                     <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
                                     <% }) %>
                                 </select>
                                 <textarea class="bg-dark" name='description' placeholder="List Description"></textarea>
-                                <input class="bg-dark" type="file" name="file">
+                                <label for="formFile">Cover/image*:</label>
+                                <input class="bg-dark" type="file" name="file" id="formFile">
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -77,6 +78,9 @@
                 <li class="col-1">
                     <span>Delete</span>
                 </li>
+                <li class="col-1">
+                    <span>Update</span>
+                </li>
             </ul>
 
             <% lists.forEach(el => { %>
@@ -88,9 +92,56 @@
                     <span> <%= el.description %> </span>
                 </li>
                 <li class="col-1">
-                    <form action="/post/deleteList/<%= el._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
-                    </form>
+                    <button type="button" class="btn btn-outline-light bi bi-trash" data-bs-toggle="modal" data-bs-target="#delete-<%= el.name %>">
+                    </button>
+
+                    <div class="modal fade" id="delete-<%= el.name %>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-body">
+                                    Are you sure you want to delete <span class="text-highlight"><%= el.name %></span> from your libraries?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                    <form action="/post/deleteList/<%= el._id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="col-1">
+                    <button type="button" class="btn btn-outline-light bi bi-pencil" data-bs-toggle="modal" data-bs-target="#update-<%= el._id %>">
+                    </button>
+
+                    <div class="modal fade" id="update-<%= el._id %>" tabindex="-1" aria-labelledby="updateListLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="updateListLabel">Library Information</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/post/updateList/<%= el._id %>?_method=PUT" id="updateList-<%= el._id %>" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
+                                        <input class="bg-dark" type="text" placeholder="List Name*" name="name" value="<%= el.name %>">
+                                        <label for="documents">Literature included in the list*</label>
+                                        <select class="bg-dark" name="documents" id="documents" multiple>
+                                            <% docs.forEach(el => { %>
+                                            <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
+                                            <% }) %>
+                                        </select>
+                                        <textarea class="bg-dark" name='description' placeholder="List Description"><%= el.description %></textarea>
+                                        <label for="formFile">Cover/image:</label>
+                                        <input class="bg-dark" type="file" name="file" id="formFile">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+                                    <button type="submit" form="updateList-<%= el._id %>" class="btn btn-primary" data-bs-dismiss="modal">Change</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             </ul>
             <% }) %>

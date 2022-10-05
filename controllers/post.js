@@ -13,11 +13,105 @@ module.exports = {
         }
     },
 
+    updateList: async (req,res) => {
+      try {
+        console.log(req.body.name)
+        console.log(req.params.id)
+        if (req.file) {
+          // Upload image to cloudinary
+          const result = await cloudinary.uploader.upload(req.file.path);
+          // Find post by id
+          let list = await List.findById({ _id: req.params.id });
+          // Delete image from cloudinary
+          if (list.cloudinaryId) {
+            await cloudinary.uploader.destroy(list.cloudinaryId);
+          }
+          await List.findOneAndUpdate(
+            { _id: req.params.id},
+            {
+              $set: {
+                name: req.body.name,
+                documents: req.body.documents,
+                image: result.secure_url,
+                cloudinaryId: result.public_id,
+                description: req.body.description,
+              }
+            }
+          )
+        } else {
+          await List.findOneAndUpdate(
+            { _id: req.params.id},
+            {
+              $set: {
+                name: req.body.name,
+                documents: req.body.documents,
+                description: req.body.description,
+              }
+            }
+          )
+        }
+        
+        console.log("Updated Library");
+        res.redirect('/dashboard/lists');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    updateDoc: async (req,res) => {
+      try {
+        if (req.file) {
+          const result = await cloudinary.uploader.upload(req.file.path);
+          // Find post by id
+          let doc = await Doc.findById({ _id: req.params.id });
+          // Delete image from cloudinary
+          if (doc.cloudinaryId) {
+            await cloudinary.uploader.destroy(doc.cloudinaryId);
+          }
+          await Doc.findOneAndUpdate(
+            { _id: req.params.id},
+            {
+              $set: {
+                title: req.body.title,
+                author: req.body.author,
+                genre: req.body.genre,
+                link: req.body.link,
+                notes: req.body.notes,
+                status: req.body.status,
+                rating: req.body.rating,
+                image: result.secure_url,
+                cloudinaryId: result.public_id,
+              }
+            }
+          )
+        } else {
+          await Doc.findOneAndUpdate(
+            { _id: req.params.id},
+            {
+              $set: {
+                title: req.body.title,
+                author: req.body.author,
+                genre: req.body.genre,
+                link: req.body.link,
+                notes: req.body.notes,
+                status: req.body.status,
+                rating: req.body.rating,
+              }
+            }
+          )
+        }
+          
+        console.log("Updated Doc");
+        res.redirect('/dashboard/literature');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
     deleteList: async (req, res) => {
       try {
         // Find post by id
         let list = await List.findById({ _id: req.params.id });
-        console.log(`list`)
         // Delete image from cloudinary
         if (list.cloudinaryId) {
           await cloudinary.uploader.destroy(list.cloudinaryId);
@@ -33,9 +127,9 @@ module.exports = {
 
     deleteDoc: async (req, res) => {
       try {
+        console.log(req.params.id)
         // Find post by id
         let doc = await Doc.findById({ _id: req.params.id });
-        console.log(`doc`)
         // Delete image from cloudinary
         if (doc.cloudinaryId) {
           await cloudinary.uploader.destroy(doc.cloudinaryId);
