@@ -25,6 +25,11 @@ const ListSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  status: {
+    type: String,
+    default: 'public',
+    enum: ['public', 'private']
+  },
   date: {
     type: Date,
     default: Date.now

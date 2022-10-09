@@ -50,11 +50,11 @@
             <% } %>
             
             <div class="d-flex flex-row align-items-center">
-                <span>Created by <%=user.name%></span>
-                <% if (!user.avatar) { %>
+                <span>Created by <%=list.user.name%></span>
+                <% if (!list.user.avatar) { %>
                     <div class="medium-avatar" style="background-image: url(/images/avatar.png)"></div>
-                <% } else if (user.avatar) { %>
-                    <div class="medium-avatar" style="background-image: url(<%=user.avatar%>)"></div>
+                <% } else if (list.user.avatar) { %>
+                    <div class="medium-avatar" style="background-image: url(<%=list.user.avatar%>)"></div>
                 <% } %>
             </div>
         </div>

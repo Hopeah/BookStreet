@@ -41,11 +41,11 @@
                     </a>
                 </div>
                 <div class="d-flex flex-row align-items-center">
-                    <span>Created by <%=user.name%></span>
-                    <% if (!user.avatar) { %>
+                    <span>Created by <%=lists[i].user.name%></span>
+                    <% if (!lists[i].user.avatar) { %>
                         <div class="small-avatar" style="background-image: url(/images/avatar.png)"></div>
-                        <% } else if (user.avatar) { %>
-                        <div class="small-avatar" style="background-image: url(<%=user.avatar%>)"></div>
+                        <% } else if (lists[i].user.avatar) { %>
+                        <div class="small-avatar" style="background-image: url(<%=lists[i].user.avatar%>)"></div>
                         <% } %>
                 </div>
             </div>

@@ -37,6 +37,10 @@ const DocSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
   date: {
     type: Date,
     default: Date.now
