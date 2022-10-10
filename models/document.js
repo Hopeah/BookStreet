@@ -7,11 +7,11 @@ const DocSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    require: true,
+    require: false,
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    require: false,
   },
   author: {
     type: String,
@@ -23,7 +23,7 @@ const DocSchema = new mongoose.Schema({
   },
   link: {
     type: String,
-    required: true,
+    required: false,
   },
   notes: {
     type: String,

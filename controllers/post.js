@@ -15,8 +15,6 @@ module.exports = {
 
     updateList: async (req,res) => {
       try {
-        console.log(req.body.name)
-        console.log(req.params.id)
         if (req.file) {
           // Upload image to cloudinary
           const result = await cloudinary.uploader.upload(req.file.path);

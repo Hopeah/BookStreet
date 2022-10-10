@@ -60,7 +60,7 @@
                                     <option value="public" selected>Public</option>
                                     <option value="private">Private</option>
                                 </select>
-                                <label for="formFile">Cover/image*:</label>
+                                <label for="formFile">Cover/image:</label>
                                 <input class="bg-dark" type="file" name="file" id="formFile">
                             </form>
                         </div>
@@ -96,10 +96,10 @@
                     <span> <%= el.description %> </span>
                 </li>
                 <li class="col-1">
-                    <button type="button" class="btn btn-outline-light bi bi-trash" data-bs-toggle="modal" data-bs-target="#delete-<%= el.name %>">
+                    <button type="button" class="btn btn-outline-light bi bi-trash" data-bs-toggle="modal" data-bs-target="#delete-<%= el._id %>">
                     </button>
 
-                    <div class="modal fade" id="delete-<%= el.name %>" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade" id="delete-<%= el._id %>" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content bg-dark">
                                 <div class="modal-body">
