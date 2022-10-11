@@ -4,7 +4,7 @@ const upload = require("../middleware/multer");
 const dashboardController = require('../controllers/dashboard')
 const { ensureAuthenticated } = require('../config/Auth')
 
-// router.get('/', ensureAuthenticated, dashboardController.getDashboard)
+router.get('/', ensureAuthenticated, dashboardController.getDashboard)
 
 router.get('/feed', dashboardController.getFeed)
 

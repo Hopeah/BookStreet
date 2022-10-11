@@ -32,6 +32,7 @@
 
     <div class="row">
         <div class="col">
+
             <div>
                 <h1>Welcome, <%= name %>!</h1>
                 <% if (!avatar) { %>
@@ -40,171 +41,26 @@
                 <img src="<%=avatar%>" alt="avatar image">
                 <% } %>
             
+                <!-- Update avatar -->
                 <form action="/dashboard/updateAvatar?_method=PUT" class="input-group w-50" enctype="multipart/form-data" method='POST'>
                     <input type="file" name="avatar" class="form-control" id="avatar" aria-describedby="avatarInput" aria-label="Upload">
                     <button class="btn btn-outline-light" type="submit" id="avatarButton">Update Avatar</button>
                 </form>
-            </div>
 
-            <!-- Adding a document (reading) -->
-            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#addDoc">
-                Add a literature entry
-            </button>
-            
-            <div class="modal fade" id="addDoc" tabindex="-1" aria-labelledby="addDocLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content bg-dark">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addDocLabel">Reading Information</h5>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/dashboard/createDoc" id="addingDoc" enctype="multipart/form-data" method='POST'>
-                                <input type="text" placeholder="Title" name='title'>
-                                <input type="text" placeholder="Author(s)" name='author'>
-                                <input type="text" placeholder="Genre" name='genre'>
-                                <label for="status">Reading status:</label>
-                                <select name="status" id="status">
-                                    <option name="status" value="Active">Active</option>
-                                    <option name="status" value="Paused">Paused</option>
-                                    <option name="status" value="Finished">Finished</option>
-                                    <option name="status" value="Future">Future</option>
-                                </select>
-                                <input type="text" placeholder="Link" name='link'>
-                                <textarea name='notes' placeholder="Place for your comments/review/notes"></textarea>
-                                <label for="rating">Rating (1 being the worst, 5 being the best)</label>
-                                <input type="number" id="rating" name='rating' min="1" max="5">
-                                <input class="form-control" type="file" name="file" id="formFile">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
-                            <button type="submit" form="addingDoc" class="btn btn-primary" data-bs-dismiss="modal">Add to my readings</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <!-- Update displayed name -->
+                <!-- <form action="/dashboard/updateName?_method=PUT" class="input-group w-50" method='POST'>
+                    <input type="text" name="name" class="form-control" id="name" aria-describedby="avatarInput" aria-label="Upload">
+                    <button class="btn btn-outline-light" type="submit" id="avatarButton">Update Avatar</button>
+                </form> -->
 
-            <!-- Adding a list (of documents/readings) -->
-            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#addList">
-                Create a list of my literature
-            </button>
-            
-            <div class="modal fade" id="addList" tabindex="-1" aria-labelledby="addListLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content bg-dark">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addListLabel">List Information</h5>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/dashboard/createList" id="addingList" enctype="multipart/form-data" method="POST">
-                                <input type="text" placeholder="List Name" name="name">
-                                <label for="documents">Literature included in the list</label>
-                                <select name="documents" id="documents" multiple>
-                                    <% docs.forEach(el => { %>
-                                    <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
-                                    <% }) %>
-                                </select>
-                                <textarea name='description' placeholder="List Description"></textarea>
-                                <input type="file" name="file">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
-                            <button type="submit" form="addingList" class="btn btn-primary" data-bs-dismiss="modal">Add to my lists</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <!-- Update password -->
 
-            <div>
-                <button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Go to Feed</a></button>
-            </div>
-        </div>
+                <!-- Update email -->
 
-        <div class="col">
-            <h2>Literature list</h2>
-            <!-- <table class="table text-white">
-                <thead>
-                  <tr>
-                    <th scope="col-5" class="fw-normal">Literature Title</th>
-                    <th scope="col-3" class="fw-normal">Status</th>
-                    <th scope="col-1" class="fw-normal">Delete</th>
-                  </tr>
-                </thead>
-            </table> -->
-            <ul class="list-unstyled row"> 
-                <li class="col-5">
-                    <span>Title</span>
-                </li>
-                <li class="col-3">
-                    <span>Status</span>
-                </li>
-                <li class="col-1">
-                    <span>Delete</span>
-                </li>
-            </ul>
-            <% docs.forEach((el, index) => { %>
-            <ul class="list-unstyled row">
-                <li class="col-5">
-                    <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link"> <%= el.title %> </span>
-                    <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content bg-dark">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="docLabel-<%= index %>"><%= el.title %></h5>
-                              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="<%= el.image %>" >
-                                <span> <%= el.author %> </span>
-                                <span> <%= el.status %> </span>
-                                <span> <%= el.genre %> </span>
-                                <span> <%= el.notes %> </span>
-                                <span> <%= el.rating %> </span>
-                                <a href="<%= el.link %>" class="text-decoration-none link-light" target=”_blank”>Get</a>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-3">
-                    <span> <%= el.status %> </span>
-                </li>
-                <li class="col-1">
-                    <form action="/post/deleteDoc/<%= el.id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
-                    </form>
-                </li>
-            </ul>
-            <% }) %>
-        </div>
-        <div class="col">
-            <h2>List of lists</h2>
-            <% lists.forEach(el => { %>
-            <ul class="list-unstyled">
-                <li>
-                    <a href="/post/<%= el._id %>" class=""><%= el.name %></a>
-                </li>
-                <!-- <li>
-                    <% for (let i=0; i < el.documents.length; i++) { %>
-                        <% docs.forEach(ele => { %>
-                            <% if (ele._id == el.documents[i].split(', ')[0]) { %>
-                                <span><%= ele.title %></span>
-                        <%  } %>
-                        <% }) %>
-                    <% } %>
-                </li> -->
-                <li>
-                    <span> <%= el.description %> </span>
-                </li>
-                <li>
-                    <form action="/post/deleteList/<%= el.id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-outline-light bi bi-trash" type="submit"></button>
-                    </form>
-                </li>
-            </ul>
-            <% }) %>
-        </div>
+                <!-- Statistics? -->
+
+            </div>
+        
     </div>
 
     <script src="js/main.js"></script>
