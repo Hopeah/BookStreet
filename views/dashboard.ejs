@@ -21,8 +21,9 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">My Dashboard</a></button></li>
                     <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
+                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Libraries</a></button></li>
                     <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
                     <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
                 </ul>
@@ -48,16 +49,18 @@
                 </form>
 
                 <!-- Update displayed name -->
-                <!-- <form action="/dashboard/updateName?_method=PUT" class="input-group w-50" method='POST'>
-                    <input type="text" name="name" class="form-control" id="name" aria-describedby="avatarInput" aria-label="Upload">
-                    <button class="btn btn-outline-light" type="submit" id="avatarButton">Update Avatar</button>
-                </form> -->
+                <form action="/dashboard/updateName?_method=PUT" class="row g-3" method='POST'>
+                    <div class="col-auto"><input type="text" name="name" class="form-control" id="name" value="<%= name %>"></div>
+                    <button class="btn btn-outline-light col-auto" type="submit" id="nameButton">Change Displayed Name</button>
+                </form>
 
                 <!-- Update password -->
 
                 <!-- Update email -->
 
-                <!-- Statistics? -->
+                <!-- Statistics -->
+                <h3>You currently have <%= docs.length ? docs.length : 'no' %> literature <%= docs.length === 1 ? 'listing' : 'listings' %>.</h3>
+                <h3>You currently have <%= lists.length ? lists.length : 'no' %> <%= lists.length === 1 ? 'library' : 'libraries' %>.</h3>
 
             </div>
         
