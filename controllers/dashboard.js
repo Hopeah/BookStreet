@@ -130,4 +130,20 @@ module.exports = {
             console.log(err)
         }
     },
+
+    updateName: async (req, res) => {
+        try {
+            await User.findOneAndUpdate(
+                {
+                    _id: req.user.id
+                },
+                {
+                    name: req.body.name
+                }
+            )
+            res.redirect('/dashboard')
+        } catch (err) {
+            console.log(err)
+        }
+    },
 }
