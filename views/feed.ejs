@@ -9,51 +9,88 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-dark text-light">
+<body class="bg-light">
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid m-2">
-            <a href="/" class="navbar-brand">Project0</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container col-lg-8">
+          <a class="navbar-brand" href="#">Project0</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard/feed">Feed</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard/literature">My Literature</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard/lists">My Libraries</a>
+              </li>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">My Dashboard</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Libraries</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+            </ul>
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <% if (!loggedUser.avatar) { %>
+                    <img src="/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <% } else if (loggedUser.avatar) { %>
+                    <img src="<%=loggedUser.avatar%>" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <% } %>
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/register/logout">Sign out</a></li>
                 </ul>
             </div>
+          </div>
         </div>
-    </nav>
-    <div class="d-flex flex-nowrap">
-        <% for(let i=0; i < lists.length; i++) { %>
-            <div class="border border-secondary m-3 p-3">
-                <div>
-                    <a href="/post/<%= lists[i]._id %>" class="d-flex flex-column align-items-center">
-                        <%= lists[i].name %>
-                        <% if (lists[i].image) { %>
-                            <div><img class="medium-image" src="<%= lists[i].image %>" alt=""></div>
-                        <% } %>
-                    </a>
-                </div>
-                <div class="d-flex flex-row align-items-center">
-                    <span>Created by <%=lists[i].user.name%></span>
-                    <% if (!lists[i].user.avatar) { %>
-                        <div class="small-avatar" style="background-image: url(/images/avatar.png)"></div>
-                        <% } else if (lists[i].user.avatar) { %>
-                        <div class="small-avatar" style="background-image: url(<%=lists[i].user.avatar%>)"></div>
-                        <% } %>
+      </nav>
+
+
+    
+    <div class="col-lg-8 mx-auto p-4 py-md-5">
+        <main>
+            <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-archive me-3" viewBox="0 0 16 16">
+                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                <div class="lh-1">
+                    <h1 class="h6 mb-0 text-white lh-1">Feed</h1>
+                    <small>Today is <span id="todayDate"></span> and here are some news for you</small>
                 </div>
             </div>
-        <% } %>
+            
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+                    
+                <% for(let i=0; i < lists.length; i++) { %>
+                    <div class="d-flex text-muted pt-3">
+                        <% if (!lists[i].user.avatar) { %>
+                        <img alt="mdo" width="32" height="32" class="me-2 rounded" src="/images/avatar.png">
+                        <% } else if (lists[i].user.avatar) { %>
+                        <img alt="mdo" width="32" height="32" class="me-2 rounded" src="<%=lists[i].user.avatar%>">
+                        <% } %>
+                        <p class="pb-3 mb-0 small lh-sm border-bottom"> 
+                            <strong class="d-block text-gray-dark">@<%=lists[i].user.name%></strong>
+                            created <a href="/post/<%= lists[i]._id %>"><%=lists[i].name%></a>
+                            
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </main>
+
+        <footer class="pt-5 my-5 text-muted border-top">
+            Created by the awesome developer &copy; 2022
+        </footer>
     </div>
 
-    <script src="js/main.js"></script>
+
+    
+
+    <script src="../js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  </body>
 </html>

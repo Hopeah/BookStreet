@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-dark text-light">
+<body class="bg-light">
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid m-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container col-lg-8">
             <a href="/" class="navbar-brand">Project0</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,137 +20,146 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">My Dashboard</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Libraries</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="/dashboard/literature" class="nav-link">My Literature</a></li>
+                    <li class="nav-item"><a href="/dashboard/lists" class="nav-link active">My Libraries</a></li>
+                    <li class="nav-item"><a href="/dashboard/feed" aria-current="page" class="nav-link">Feed</a></li>
                 </ul>
-            </div>
-        </div>
-    </nav>
+                <div class="me-auto">
+                    <button class="btn btn-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#addList">Add Library</button>
 
-    <div class="container row">
-
-        <div class="col">
-            <div class="d-flex flex-row">
-                <h2 class="me-2">Libraries</h2>
-
-                <!-- Adding a list (of documents/readings) -->
-                <a href="#" class="bi bi-plus-circle h-25" role="button" data-bs-toggle="modal" data-bs-target="#addList"></a>
-            </div>
-                        
-            <div class="modal fade" id="addList" tabindex="-1" aria-labelledby="addListLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content bg-dark">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addListLabel">List Information</h5>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/dashboard/createList" id="addingList" class="d-flex flex-column" enctype="multipart/form-data" method="POST">
-                                <input class="bg-dark" type="text" placeholder="List Name*" name="name">
-                                <label for="documents">Literature included in the list*</label>
-                                <select class="bg-dark" name="documents" id="documents" multiple>
-                                    <% docs.forEach(el => { %>
-                                    <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
-                                    <% }) %>
-                                </select>
-                                <textarea class="bg-dark" name='description' placeholder="List Description"></textarea>
-                                <select class="bg-dark" name="status" id="status">
-                                    <option value="public" selected>Public</option>
-                                    <option value="private">Private</option>
-                                </select>
-                                <label for="formFile">Cover/image:</label>
-                                <input class="bg-dark" type="file" name="file" id="formFile">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
-                            <button type="submit" form="addingList" class="btn btn-primary" data-bs-dismiss="modal">Add to my lists</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <ul class="list-unstyled row"> 
-                <li class="col-3">
-                    <span>Title</span>
-                </li>
-                <li class="col-5">
-                    <span>Description</span>
-                </li>
-                <li class="col-1">
-                    <span>Delete</span>
-                </li>
-                <li class="col-1">
-                    <span>Update</span>
-                </li>
-            </ul>
-
-            <% lists.forEach(el => { %>
-            <ul class="list-unstyled row">
-                <li class="col-3">
-                    <a href="/post/<%= el._id %>"><%= el.name %></a>
-                </li>
-                <li class="col-5">
-                    <span> <%= el.description %> </span>
-                </li>
-                <li class="col-1">
-                    <button type="button" class="btn btn-outline-light bi bi-trash" data-bs-toggle="modal" data-bs-target="#delete-<%= el._id %>">
-                    </button>
-
-                    <div class="modal fade" id="delete-<%= el._id %>" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade" id="addList" tabindex="-1" aria-labelledby="addListLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content bg-dark">
-                                <div class="modal-body">
-                                    Are you sure you want to delete <span class="text-highlight"><%= el.name %></span> from your libraries?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
-                                    <form action="/post/deleteList/<%= el._id %>?_method=DELETE" method="POST">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-1">
-                    <button type="button" class="btn btn-outline-light bi bi-pencil" data-bs-toggle="modal" data-bs-target="#update-<%= el._id %>">
-                    </button>
-
-                    <div class="modal fade" id="update-<%= el._id %>" tabindex="-1" aria-labelledby="updateListLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-dark">
+                            <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="updateListLabel">Library Information</h5>
+                                    <h5 class="modal-title" id="addListLabel">Library Information</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/post/updateList/<%= el._id %>?_method=PUT" id="updateList-<%= el._id %>" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
-                                        <input class="bg-dark" type="text" placeholder="List Name*" name="name" value="<%= el.name %>">
-                                        <label for="documents">Literature included in the list*</label>
-                                        <select class="bg-dark" name="documents" id="documents" multiple>
+                                    <form action="/dashboard/createList" id="addingList" class="d-flex flex-column" enctype="multipart/form-data" method="POST">
+                                        <input class="" type="text" placeholder="List Name*" name="name">
+                                        <label for="documents">Literature included in the library*</label>
+                                        <select class="" name="documents" id="documents" multiple>
                                             <% docs.forEach(el => { %>
                                             <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
                                             <% }) %>
                                         </select>
-                                        <textarea class="bg-dark" name='description' placeholder="List Description"><%= el.description %></textarea>
+                                        <textarea class="" name='description' placeholder="List Description"></textarea>
+                                        <select class="" name="status" id="status">
+                                            <option value="public" selected>Public</option>
+                                            <option value="private">Private</option>
+                                        </select>
                                         <label for="formFile">Cover/image:</label>
-                                        <input class="bg-dark" type="file" name="file" id="formFile">
+                                        <input class="" type="file" name="file" id="formFile">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
-                                    <button type="submit" form="updateList-<%= el._id %>" class="btn btn-primary" data-bs-dismiss="modal">Change</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
+                                    <button type="submit" form="addingList" class="btn btn-primary" data-bs-dismiss="modal">Add to my libraries</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-            </ul>
-            <% }) %>
+                </div>
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <% if (!avatar) { %>
+                        <img src="/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <% } else if (avatar) { %>
+                        <img src="<%=avatar%>" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <% } %>
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/register/logout">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </nav>
+
+    <div class="col-lg-8 mx-auto p-4 py-md-5">
+        <main>
+            <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-lines-fill me-3" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                </svg>
+                <div class="lh-1">
+                    <h1 class="h6 mb-0 text-white lh-1">Libraries</h1>
+                    <small>If you put some books together, you get your first library. Or not.</small>
+                </div>
+            </div>
+
+            <div class="container px-4 py-5" id="custom-cards">
+                <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+                <% lists.forEach(el => { %>
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url(<%=el.image%>)">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"><%= el.name %></h3>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="btn-group">
+                                        <button onclick="window.open('/post/<%= el._id %>', '_blank')" type="button" class="btn btn-sm btn-outline-light">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-light">Share</button>
+
+                                        <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#update-<%= el._id %>">Edit</button>
+                                            <div class="modal fade" id="update-<%= el._id %>" tabindex="-1" aria-labelledby="updateListLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="updateListLabel">Library Information</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/post/updateList/<%= el._id %>?_method=PUT" id="updateList-<%= el._id %>" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
+                                                                <input class="" type="text" placeholder="List Name*" name="name" value="<%= el.name %>">
+                                                                <label for="documents">Literature included in the list*</label>
+                                                                <select class="" name="documents" id="documents" multiple>
+                                                                    <% docs.forEach(el => { %>
+                                                                    <option name="documents[]" value="<%= el._id %>"> <%= el.title %> </option>
+                                                                    <% }) %>
+                                                                </select>
+                                                                <textarea class="" name='description' placeholder="List Description"><%= el.description %></textarea>
+                                                                <label for="formFile">Cover/image:</label>
+                                                                <input class="" type="file" name="file" id="formFile">
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+                                                            <button type="submit" form="updateList-<%= el._id %>" class="btn btn-primary" data-bs-dismiss="modal">Change</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#delete-<%= el._id %>">Delete</button>
+                                            <div class="modal fade" id="delete-<%= el._id %>" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete <span class="text-highlight"><%= el.name %></span> from your libraries?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                                            <form action="/post/deleteList/<%= el._id %>?_method=DELETE" method="POST">
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="pt-5 my-5 text-muted border-top">
+            Created by the awesome developer &copy; 2022
+        </footer>
     </div>
 
     <script src="js/main.js"></script>
