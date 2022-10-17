@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-dark text-light">
+<body class="bg-light">
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid m-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container col-lg-8">
             <a href="/" class="navbar-brand">Project0</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,163 +20,210 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">My Dashboard</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Libraries</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="/dashboard/literature" class="nav-link active">My Literature</a></li>
+                    <li class="nav-item"><a href="/dashboard/lists" class="nav-link">My Libraries</a></li>
+                    <li class="nav-item"><a href="/dashboard/feed" aria-current="page" class="nav-link">Feed</a></li>
                 </ul>
+                <div class="me-auto">
+                    <button class="btn btn-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#addDoc">Add Literature</button>
+                </div>
+                <div class="modal fade" id="addDoc" tabindex="-1" aria-labelledby="addDocLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addDocLabel">Reading Information</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/dashboard/createDoc" id="addingDoc" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
+                                    <input class="bg-dark" type="text" placeholder="Title*" name='title'>
+                                    <input class="bg-dark" type="text" placeholder="Author(s)" name='author'>
+                                    <input class="bg-dark" type="text" placeholder="Genre" name='genre'>
+                                    <label for="status">Reading status*:</label>
+                                    <select class="bg-dark" name="status" id="status">
+                                        <option name="status" value="Active">Active</option>
+                                        <option name="status" value="Paused">Paused</option>
+                                        <option name="status" value="Finished">Finished</option>
+                                        <option name="status" value="Future">Future</option>
+                                    </select>
+                                    <input class="bg-dark" type="text" placeholder="Link" name='link'>
+                                    <textarea class="bg-dark" name='notes' placeholder="Place for your comments/review/notes"></textarea>
+                                    <label for="rating">Rating (1 being the worst, 5 being the best):</label>
+                                    <input class="bg-dark" type="number" id="rating" name='rating' min="1" max="5">
+                                    <label for="formFile">Cover/image:</label>
+                                    <input class="bg-dark" class="form-control" type="file" name="file" id="formFile">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
+                                <button type="submit" form="addingDoc" class="btn btn-primary" data-bs-dismiss="modal">Add to my readings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <% if (!avatar) { %>
+                        <img src="/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <% } else if (avatar) { %>
+                        <img src="<%=avatar%>" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <% } %>
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/register/logout">Sign out</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div class="row container">
-
-        <div class="d-flex flex-row">
-            <h2 class="me-2">Literature collection</h2>
-
-            <!-- Adding a document (reading) -->
-            <a href="#" class="bi bi-plus-circle h-25" role="button" data-bs-toggle="modal" data-bs-target="#addDoc"></a>
-        </div>
-            
-        <div class="modal fade" id="addDoc" tabindex="-1" aria-labelledby="addDocLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content bg-dark">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addDocLabel">Reading Information</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/dashboard/createDoc" id="addingDoc" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
-                            <input class="bg-dark" type="text" placeholder="Title*" name='title'>
-                            <input class="bg-dark" type="text" placeholder="Author(s)" name='author'>
-                            <input class="bg-dark" type="text" placeholder="Genre" name='genre'>
-                            <label for="status">Reading status*:</label>
-                            <select class="bg-dark" name="status" id="status">
-                                <option name="status" value="Active">Active</option>
-                                <option name="status" value="Paused">Paused</option>
-                                <option name="status" value="Finished">Finished</option>
-                                <option name="status" value="Future">Future</option>
-                            </select>
-                            <input class="bg-dark" type="text" placeholder="Link" name='link'>
-                            <textarea class="bg-dark" name='notes' placeholder="Place for your comments/review/notes"></textarea>
-                            <label for="rating">Rating (1 being the worst, 5 being the best):</label>
-                            <input class="bg-dark" type="number" id="rating" name='rating' min="1" max="5">
-                            <label for="formFile">Cover/image:</label>
-                            <input class="bg-dark" class="form-control" type="file" name="file" id="formFile">
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe later</button>
-                        <button type="submit" form="addingDoc" class="btn btn-primary" data-bs-dismiss="modal">Add to my readings</button>
-                    </div>
+    <div class="col-lg-8 mx-auto p-4 py-md-5">
+        <main>
+            <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-book-half me-3" viewBox="0 0 16 16">
+                    <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                </svg>
+                <div class="lh-1">
+                    <h1 class="h6 mb-0 text-white lh-1">My literature</h1>
+                    <small>"Books and doors are the same thing. You open them, and you go through into another world." – Jeanette Winterson</small>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <ul class="list-unstyled row"> 
-                <li class="col-3">
-                    <span>Title</span>
-                </li>
-                <li class="col-3">
-                    <span>Status</span>
-                </li>
-                <li class="col-1">
-                    <span>Delete</span>
-                </li>
-                <li class="col-1">
-                    <span>Update</span>
-                </li>
-            </ul>
-            <% docs.forEach((el, index) => { %>
-            <ul class="list-unstyled row">
-                <li class="col-3">
-                    <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link"> <%= el.title %> </span>
-                    <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content bg-dark">
-                            <div class="modal-header">
-                              <h3 class="modal-title" id="docLabel-<%= index %>"><%= el.title %></h3>
-                              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <% docs.forEach((el, index) => { %>
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <% if (!el.image) { %>
+                            <img src="/images/book.png">
+                            <% } else if (avatar) { %>
+                            <img src="<%=el.image%>">
+                            <% } %>
+                            <div class="card-body">
+                                <p class="badge text-bg-primary"><%= el.status %></p>
+                                <p class="card-text"><%= el.notes %></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#doc-<%= index %>">View</button>
+                                            <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h3 class="modal-title" id="docLabel-<%= index %>"><%= el.title %></h3>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body d-flex flex-column align-items-center">
+                                                        <img class="img-fluid mb-1" src="<%= el.image %>" >
+                                                        <span>Written by <%= el.author %> </span>
+                                                        <span>Current status: <%= el.status %> </span>
+                                                        <span>Genre: <%= el.genre %> </span>
+                                                        <span>Notes: <%= el.notes %> </span>
+                                                        <span>Rating: <%= el.rating %> </span>
+                                                        <span>Where to get: <a href="<%= el.link %>" class="text-decoration-none" target=”_blank”>Get</a></span>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#update-<%= el._id %>">Edit</button>
+                                            <div class="modal fade" id="update-<%= el._id %>" tabindex="-1" aria-labelledby="updateDocLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="updateDocLabel">Reading Information</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/post/updateDoc/<%= el._id %>?_method=PUT" id="updateDoc-<%= el._id %>" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
+                                                                <input class="" type="text" placeholder="Title*" value="<%= el.title %>" name='title'>
+                                                                <input class="" type="text" placeholder="Author(s)" value="<%= el.author %>" name='author'>
+                                                                <input class="" type="text" placeholder="Genre" value="<%= el.genre %>" name='genre'>
+                                                                <label for="status">Reading status*:</label>
+                                                                <select class="" name="status" id="status" value="<%= el.status %>">
+                                                                    <option name="status" value="Active">Active</option>
+                                                                    <option name="status" value="Paused">Paused</option>
+                                                                    <option name="status" value="Finished">Finished</option>
+                                                                    <option name="status" value="Future">Future</option>
+                                                                </select>
+                                                                <input class="" type="text" placeholder="Link*" value="<%= el.link %>" name='link'>
+                                                                <textarea class="" name='notes' placeholder="Place for your comments/review/notes"><%= el.notes %></textarea>
+                                                                <label for="rating">Rating (1 being the worst, 5 being the best):</label>
+                                                                <input class="" type="number" id="rating" name='rating' min="1" max="5" value="<%= el.rating %>">
+                                                                <label for="formFile">Cover/image:</label>
+                                                                <input class="" class="form-control" type="file" name="file" id="formFile">
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+                                                            <button type="submit" form="updateDoc-<%= el._id %>" class="btn btn-primary" data-bs-dismiss="modal">Change</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#delete-<%= el._id %>">Delete</button>
+                                            <div class="modal fade" id="delete-<%= el._id %>" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete <span class="text-highlight"><%= el.title %></span> from your literature?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                                            <form action="/post/deleteDoc/<%= el._id %>?_method=DELETE" method="POST">
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <small class="text-muted">
+                                        <% if (el.rating === 5) { %>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                        <% } else if (el.rating === 4) { %>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star--half"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star"></i>
+                                        <% } else if (el.rating === 3) { %>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star--half"></i>
+                                            <i class="bi bi-star"></i>
+                                            <i class="bi bi-star"></i>
+                                        <% } else if (el.rating === 2) { %>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star"></i>
+                                            <i class="bi bi-star"></i>
+                                            <i class="bi bi-star"></i>
+                                        <% } else if (el.rating === 1) { %>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star"></i>
+                                            <i class="bi bi-star"></i>
+                                            <i class="bi bi-star"></i>
+                                            <i class="bi bi-star"></i>
+                                        <% } %>
+                                    </small>
+                                </div>
                             </div>
-                            <div class="modal-body d-flex flex-column align-items-center">
-                                <img class="img-fluid mb-1" src="<%= el.image %>" >
-                                <span>Written by <%= el.author %> </span>
-                                <span>Current status: <%= el.status %> </span>
-                                <span>Genre: <%= el.genre %> </span>
-                                <span>Notes: <%= el.notes %> </span>
-                                <span>Rating: <%= el.rating %> </span>
-                                <span>Where to get: <a href="<%= el.link %>" class="text-decoration-none link-light" target=”_blank”>Get</a></span>
-                            </div>
-                          </div>
                         </div>
                     </div>
-                </li>
-                <li class="col-3">
-                    <span> <%= el.status %> </span>
-                </li>
-                <li class="col-1">
-                    <button type="button" class="btn btn-outline-light bi bi-trash" data-bs-toggle="modal" data-bs-target="#delete-<%= el._id %>">
-                    </button>
 
-                    <div class="modal fade" id="delete-<%= el._id %>" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-dark">
-                                <div class="modal-body">
-                                    Are you sure you want to delete <span class="text-highlight"><%= el.title %></span> from your literature?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
-                                    <form action="/post/deleteDoc/<%= el._id %>?_method=DELETE" method="POST">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-1">
-                    <button type="button" class="btn btn-outline-light bi bi-pencil" data-bs-toggle="modal" data-bs-target="#update-<%= el._id %>">
-                    </button>
+                <% }) %>
+            </div>
 
-                    <div class="modal fade" id="update-<%= el._id %>" tabindex="-1" aria-labelledby="updateDocLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content bg-dark">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="updateDocLabel">Reading Information</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="/post/updateDoc/<%= el._id %>?_method=PUT" id="updateDoc-<%= el._id %>" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
-                                        <input class="bg-dark" type="text" placeholder="Title*" value="<%= el.title %>" name='title'>
-                                        <input class="bg-dark" type="text" placeholder="Author(s)" value="<%= el.author %>" name='author'>
-                                        <input class="bg-dark" type="text" placeholder="Genre" value="<%= el.genre %>" name='genre'>
-                                        <label for="status">Reading status*:</label>
-                                        <select class="bg-dark" name="status" id="status" value="<%= el.status %>">
-                                            <option name="status" value="Active">Active</option>
-                                            <option name="status" value="Paused">Paused</option>
-                                            <option name="status" value="Finished">Finished</option>
-                                            <option name="status" value="Future">Future</option>
-                                        </select>
-                                        <input class="bg-dark" type="text" placeholder="Link*" value="<%= el.link %>" name='link'>
-                                        <textarea class="bg-dark" name='notes' placeholder="Place for your comments/review/notes"><%= el.notes %></textarea>
-                                        <label for="rating">Rating (1 being the worst, 5 being the best):</label>
-                                        <input class="bg-dark" type="number" id="rating" name='rating' min="1" max="5" value="<%= el.rating %>">
-                                        <label for="formFile">Cover/image:</label>
-                                        <input class="bg-dark" class="form-control" type="file" name="file" id="formFile">
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
-                                    <button type="submit" form="updateDoc-<%= el._id %>" class="btn btn-primary" data-bs-dismiss="modal">Change</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <% }) %>
-        </div>
+        </main>
+
+        <footer class="pt-5 my-5 text-muted border-top">
+            Created by the awesome developer &copy; 2022
+        </footer>
     </div>
 
     <script src="js/main.js"></script>
