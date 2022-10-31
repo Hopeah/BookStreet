@@ -9,61 +9,97 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-dark text-light">
+<body class="bg-light">
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid m-2">
-            <a href="/" class="navbar-brand">Project0</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container col-lg-8">
+            <a href="/dashboard/feed" class="navbar-brand">Book Street</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">My Dashboard</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Libraries</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="/dashboard/literature" class="nav-link">My Literature</a></li>
+                    <li class="nav-item"><a href="/dashboard/lists" class="nav-link">My Libraries</a></li>
+                    <li class="nav-item"><a href="/dashboard/feed" aria-current="page" class="nav-link">Feed</a></li>
                 </ul>
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <% if (!avatar) { %>
+                        <img src="/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <% } else if (avatar) { %>
+                        <img src="<%=avatar%>" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <% } %>
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/register/logout">Sign out</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div class="row">
-        <div class="col">
+    <div class="col-lg-8 mx-auto p-4 py-md-5">
 
-            <div>
-                <h1>Welcome, <%= name %>!</h1>
-                <% if (!avatar) { %>
-                <img src="/images/avatar.png" alt="avatar image">
-                <% } else if (avatar) { %>
-                <img src="<%=avatar%>" alt="avatar image">
-                <% } %>
-            
-                <!-- Update avatar -->
-                <form action="/dashboard/updateAvatar?_method=PUT" class="input-group w-50" enctype="multipart/form-data" method='POST'>
-                    <input type="file" name="avatar" class="form-control" id="avatar" aria-describedby="avatarInput" aria-label="Upload">
-                    <button class="btn btn-outline-light" type="submit" id="avatarButton">Update Avatar</button>
-                </form>
-
-                <!-- Update displayed name -->
-                <form action="/dashboard/updateName?_method=PUT" class="row g-3" method='POST'>
-                    <div class="col-auto"><input type="text" name="name" class="form-control" id="name" value="<%= name %>"></div>
-                    <button class="btn btn-outline-light col-auto" type="submit" id="nameButton">Change Displayed Name</button>
-                </form>
-
-                <!-- Update password -->
-
-                <!-- Update email -->
-
-                <!-- Statistics -->
-                <h3>You currently have <%= docs.length ? docs.length : 'no' %> literature <%= docs.length === 1 ? 'listing' : 'listings' %>.</h3>
-                <h3>You currently have <%= lists.length ? lists.length : 'no' %> <%= lists.length === 1 ? 'library' : 'libraries' %>.</h3>
-
+        <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-gear-wide-connected me-3" viewBox="0 0 16 16">
+                <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z"/>
+            </svg>
+            <div class="lh-1">
+                <h1 class="h6 mb-0 text-white lh-1">Settings</h1>
+                <small>Profile and site customization</small>
             </div>
+        </div>
+        <main class="main-content">
+            
         
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <div class="col">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <% if (!avatar) { %>
+                                <img src="/images/avatar.png" alt="avatar image" width="250" height="250" class="rounded-circle m-3">
+                                <% } else if (avatar) { %>
+                                <img src="<%=avatar%>" alt="mavatar image" width="250" height="250" class="rounded-circle m-3">
+                                <% } %>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Hi, <%= name %>!</h5>
+                                    <p class="card-text">Here you can change your name and image. You are free to change them as much as you feel. Just for the sake of your friends and acquaintances, don't do this too often!</p>
+    
+                                    <h6 class="card-title">Change My Name</h6>
+                                    <form action="/dashboard/updateName?_method=PUT" method='POST' class="needs-validation">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">New name</span>
+                                            <input type="text" class="form-control" name="name" placeholder="<%= name %>" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Change Name</button>
+                                        </div>
+                                    </form>
+    
+                                    <h6 class="card-title">Change My Image</h6>
+                                    <form action="/dashboard/updateAvatar?_method=PUT" enctype="multipart/form-data" method='POST' class="needs-validation">
+                                        <div class="input-group mb-0">
+                                            <input type="file" name="avatar" class="form-control" id="avatar" aria-describedby="avatarInput" aria-label="Upload" required>
+                                            <button class="btn btn-outline-secondary" type="submit" id="avatarButton">Update Avatar</button>
+                                        </div>
+                                        <span class="small secondary">For better results choose a square image. Recommended size is 500x500px.</span>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </main>
+      <footer class="pt-5 my-5 text-muted border-top">
+        Created by the awesome developer &copy; 2022
+      </footer>
     </div>
 
     <script src="js/main.js"></script>

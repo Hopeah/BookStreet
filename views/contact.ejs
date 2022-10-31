@@ -7,100 +7,137 @@
     <title>Contact</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-dark text-light">
+<body class="bg-light">
     
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid m-2">
-            <a href="/" class="navbar-brand">Project0</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item dropdown me-2">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false" onclick="this.blur();">Log in</button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <form class="px-4 py-3" id="login-form" action="/register/login" method="POST">
-                              <div class="mb-3">
-                                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                                <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password">
-                              </div>
-                              <div class="mb-3">
-                                <div class="form-check">
-                                  <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                  <label class="form-check-label" for="dropdownCheck">
-                                    Remember me
-                                  </label>
-                                </div>
-                              </div>
-                              <button type="submit" class="btn btn-primary">Sign in</button>
-                            </form>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">New around here? Sign up</a>
-                            <a class="dropdown-item" href="#">Forgot password?</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <button type="button" class="btn btn-info" data-bs-toggle="dropdown" aria-expanded="false" onclick="this.blur();">Sign up</button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <form class="px-4 py-3" id="register" action="/register" method="POST">
-                              <div class="mb-3">
-                                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                                <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com" value="<%= typeof email != 'undefined' ? email : '' %>">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleDropdownFormEmail1" class="form-label">Name</label>
-                                <input type="name" name="name" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleDropdownFormPassword1" class="form-label">Repeat password</label>
-                                <input type="password" name="password2" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
-                              </div>
-                              <button type="submit" class="btn btn-primary">Register</button>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-                <%- include ("./partials/messages") %>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container col-lg-8">
+        <a class="navbar-brand" href="/">Book Street</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                 <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                 <a class="nav-link active" href="/contact">Contacts</a>
+                </li>
+            </ul>
+            <div class="dropdown text-end">
+                <form class="me-auto">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" href="#signUp">Sign Up</button>
+                    or
+                    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="modal" href="#logIn">Log In</button>
+                </form>
             </div>
-
         </div>
-    </nav>
+    </div>
+  </nav>
+
+  <!-- Modal for Sign Up -->
+  <div class="modal fade" id="signUp" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="signUpToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="signUpToggleLabel">Sign Up</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="px-4 py-3" id="register" action="/register" method="POST">
+            <div class="mb-3">
+              <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+              <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com" value="<%= typeof email != 'undefined' ? email : '' %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleDropdownFormEmail1" class="form-label">Name</label>
+              <input type="name" name="name" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleDropdownFormPassword1" class="form-label">Repeat password</label>
+              <input type="password" name="password2" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" data-bs-target="#logIn" data-bs-toggle="modal">Already registered, sign me in instead</button>
+          <button type="submit" class="btn btn-primary btn-lg" form="register">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Log In -->
+  <div class="modal fade" id="logIn" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="logInToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="logInToggleLabel">Log In</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="px-4 py-3" id="login-form" action="/register/login" method="POST">
+            <div class="mb-3">
+              <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+              <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" required>
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                <label class="form-check-label" for="dropdownCheck">
+                  Remember me
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" data-bs-target="#signUp" data-bs-toggle="modal">Need to register first</button>
+          <button type="submit" class="btn btn-primary btn-lg" form="login-form">Log in</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div><%- include ("./partials/messages") %></div>
 
     <!-- Main section -->
-    <section class="position-absolute top-50 start-50 translate-middle">
+    <main>
+      <section class="p-3 pb-md-4 mx-auto text-center">
         <div class="d-flex flex-column align-items-center mb-3">
             <div class="me-4 text-center">
-                <h2 class="fs-1">Contact Me!</h2>
+                <h2 class="fs-1">Contact Us!</h2>
                 <p class="fs-4">Have questions about this app?<br />
                 Have exciting ideas about this project?<br />
                 Simply want to chat?<br />
                 You can find me active on any of the platforms below.</p>
             </div>
             <ul class="list-unstyled d-flex flex-row mx-3 text-center">
-                <li><a href="https://twitter.com/Hopeahh" class="bi bi-twitter link-info fs-3 mx-3"></a></li>
-                <li><a href="https://www.linkedin.com/in/irina-petrova-se/" class="bi bi-linkedin link-info fs-3 mx-3"></a></li>
-                <li><a href="https://github.com/Hopeah" class="bi bi-github link-info fs-3 mx-3"></a></li>
-                <li><a href="https://irinapetrova.dev" class="bi bi-file-person link-info fs-3 mx-3"></a></li>
-                <li><a href="mailto: irina@theluky.com" class="bi bi-envelope link-info fs-3 mx-3"></a></li>
+                <li><a href="https://twitter.com/Hopeahh" class="bi bi-twitter link-primary fs-3 mx-3"></a></li>
+                <li><a href="https://www.linkedin.com/in/irina-petrova-se/" class="bi bi-linkedin link-primary fs-3 mx-3"></a></li>
+                <li><a href="https://github.com/Hopeah" class="bi bi-github link-primary fs-3 mx-3"></a></li>
+                <li><a href="https://irinapetrova.dev" class="bi bi-file-person link-primary fs-3 mx-3"></a></li>
+                <li><a href="mailto: irina@theluky.com" class="bi bi-envelope link-primary fs-3 mx-3"></a></li>
             </ul>
         </div>
-    </section>
+      </section>
+    </main>
+    
+
+    <footer class="pt-5 my-5 text-muted border-top">
+      Created by the awesome developer &copy; 2022
+    </footer>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
