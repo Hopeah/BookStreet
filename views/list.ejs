@@ -9,85 +9,220 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-dark text-light">
+<body class="bg-light">
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid m-2">
-            <a href="/" class="navbar-brand">Project0</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard" class="text-decoration-none link-light">My Dashboard</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/literature" class="text-decoration-none link-light">My Literature</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/lists" class="text-decoration-none link-light">My Lists</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/dashboard/feed" class="text-decoration-none link-light">Feed</a></button></li>
-                    <li class="nav-item"><button type="button" class="btn btn-outline-secondary"><a href="/register/logout" class="text-decoration-none link-light">Logout</a></button></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container col-lg-8">
+          <a class="navbar-brand" href="/dashboard/feed">Book Street</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard/literature">My Literature</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard/lists">My Libraries</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/dashboard/feed">Feed</a>
+              </li>
+            </ul>
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <% if (!user.avatar) { %>
+                    <img src="/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <% } else if (user.avatar) { %>
+                    <img src="<%=user.avatar%>" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <% } %>
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/register/logout">Sign out</a></li>
                 </ul>
             </div>
+          </div>
         </div>
     </nav>
 
-    <div class="position-absolute top-50 start-50 translate-middle">
-        <div class="d-flex flex-column align-items-center">
-            <h1><%= list.name %>!</h1>
+    <div class="col-lg-8 mx-auto p-4 py-md-5">
+        <section>
+            <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
 
-            
-            <img class="img-fluid mb-3" src="<%= list.image %>">
-        
-    
-            <span class="mb-3"><%= list.description %></span>
-            
-            
-            <% for (let i=0; i < list.documents.length; i++) { %>
-                <% docs.forEach((ele, index) => { %>
-                    <% if (ele._id == list.documents[i].split(', ')[0]) { %>
-                        <span data-bs-toggle="modal" data-bs-target="#doc-<%= index %>" class="span-link mb-3"> <%= ele.title %> </span>
-                    <%  } %>
-                <% }) %>
-            <% } %>
-            
-            <div class="d-flex flex-row align-items-center">
-                <span>Created by <%=list.user.name%></span>
-                <% if (!list.user.avatar) { %>
-                    <div class="medium-avatar" style="background-image: url(/images/avatar.png)"></div>
-                <% } else if (list.user.avatar) { %>
-                    <div class="medium-avatar" style="background-image: url(<%=list.user.avatar%>)"></div>
-                <% } %>
+                <div class="card card-cover overflow-hidden text-bg-dark rounded-4 shadow-lg me-3" style="background-image: url('<%= list.image %>'); height: 100px; width: 250px;">&nbsp;</div>
+
+                <div class="lh-1 w-100">
+                    <h1 class="h6 mb-0 text-white lh-1"><%= list.name %></h1>
+                    <small><%= list.description %></small>
+                    <div class="mt-3">
+                        <span>Created by <%=list.user.name%></span>
+                        <% if (!list.user.avatar) { %>
+                        <img alt="mdo" width="32" height="32" class="me-2 rounded" src="/images/avatar.png">
+                        <% } else if (list.user.avatar) { %>
+                        <img alt="mdo" width="32" height="32" class="me-2 rounded" src="<%=list.user.avatar%>">
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="d-fled text-end">
+                    <div class="btn-group"> 
+                        <button type="button" class="btn btn-sm btn-outline-light">Share</button>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </section>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <% for (let i=0; i < list.documents.length; i++) { %>
+              <% docs.forEach((el, index) => { %>
+                  <% if (el._id == list.documents[i].split(', ')[0]) { %>
+                    <div class="col">
+                      <div class="card shadow-sm">
+                          <% if (!el.image) { %>
+                          <img src="/images/book.png">
+                          <% } else { %>
+                          <img src="<%=el.image%>">
+                          <% } %>
+                          <div class="card-body">
+                              <% if (el.status === "Active") { %>
+                                  <p class="badge text-bg-primary"><%= el.status %></p>
+                              <% } else if (el.status === "Paused") { %>
+                                  <p class="badge text-bg-secondary">On Hold</p>
+                              <% } else if (el.status === "Finished") { %>
+                                  <p class="badge text-bg-success">Finished</p>
+                              <% } else if (el.status === "Future") { %>
+                                  <p class="badge text-bg-warning">Planning to read</p>
+                              <% } %>
+                              <p class="card-text"><%= el.notes %></p>
+                              <div class="d-flex justify-content-between align-items-center">
+                                  <div class="btn-group">
+                                      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#doc-<%= index %>">View</button>
+                                          <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                  <h3 class="modal-title" id="docLabel-<%= index %>"><%= el.title %></h3>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                  <div class="modal-body d-flex flex-column align-items-center">
+                                                      <img class="img-fluid mb-1" src="<%= el.image %>" >
+                                                      <span>Written by <%= el.author %> </span>
+                                                      <span>Current status: <%= el.status %> </span>
+                                                      <span>Genre: <%= el.genre %> </span>
+                                                      <span>Notes: <%= el.notes %> </span>
+                                                      <span>Rating: <%= el.rating %> </span>
+                                                      <span>Where to get: <a href="<%= el.link %>" class="text-decoration-none" target=”_blank”>Get</a></span>
+                                                  </div>
+                                              </div>
+                                              </div>
+                                          </div>
+                                    <% if (list.user.id === user.id) { %>
+                                      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#update-<%= el._id %>">Edit</button>
+                                          <div class="modal fade" id="update-<%= el._id %>" tabindex="-1" aria-labelledby="updateDocLabel" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="updateDocLabel">Reading Information</h5>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                          <form action="/post/updateDoc/<%= el._id %>?_method=PUT" id="updateDoc-<%= el._id %>" class="d-flex flex-column" enctype="multipart/form-data" method='POST'>
+                                                              <input class="" type="text" placeholder="Title*" value="<%= el.title %>" name='title'>
+                                                              <input class="" type="text" placeholder="Author(s)" value="<%= el.author %>" name='author'>
+                                                              <input class="" type="text" placeholder="Genre" value="<%= el.genre %>" name='genre'>
+                                                              <label for="status">Reading status*:</label>
+                                                              <select class="" name="status" id="status" value="<%= el.status %>">
+                                                                  <option name="status" value="Active">Active</option>
+                                                                  <option name="status" value="Paused">Paused</option>
+                                                                  <option name="status" value="Finished">Finished</option>
+                                                                  <option name="status" value="Future">Future</option>
+                                                              </select>
+                                                              <input class="" type="text" placeholder="Link*" value="<%= el.link %>" name='link'>
+                                                              <textarea class="" name='notes' placeholder="Place for your comments/review/notes"><%= el.notes %></textarea>
+                                                              <label for="rating">Rating (1 being the worst, 5 being the best):</label>
+                                                              <input class="" type="number" id="rating" name='rating' min="1" max="5" value="<%= el.rating %>">
+                                                              <label for="formFile">Cover/image:</label>
+                                                              <input class="" class="form-control" type="file" name="file" id="formFile">
+                                                          </form>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+                                                          <button type="submit" form="updateDoc-<%= el._id %>" class="btn btn-primary" data-bs-dismiss="modal">Change</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      
+                                      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#delete-<%= el._id %>">Delete</button>
+                                          <div class="modal fade" id="delete-<%= el._id %>" tabindex="-1" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                      <div class="modal-body">
+                                                          Are you sure you want to delete <span class="text-highlight"><%= el.title %></span> from your literature?
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                                          <form action="/post/deleteDoc/<%= el._id %>?_method=DELETE" method="POST">
+                                                              <button type="submit" class="btn btn-danger">Delete</button>
+                                                          </form>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <% } %>
+                                  </div>
+                                  <small class="text-muted">
+                                      <% if (el.rating === 5) { %>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                      <% } else if (el.rating === 4) { %>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star"></i>
+                                      <% } else if (el.rating === 3) { %>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star"></i>
+                                          <i class="bi bi-star"></i>
+                                      <% } else if (el.rating === 2) { %>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star"></i>
+                                          <i class="bi bi-star"></i>
+                                          <i class="bi bi-star"></i>
+                                      <% } else if (el.rating === 1) { %>
+                                          <i class="bi bi-star-fill"></i>
+                                          <i class="bi bi-star"></i>
+                                          <i class="bi bi-star"></i>
+                                          <i class="bi bi-star"></i>
+                                          <i class="bi bi-star"></i>
+                                      <% } %>
+                                  </small>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <%  } %>
+              <% }) %>
+          <% } %>
+          </div>
+
+          <footer class="pt-5 my-5 text-muted border-top">
+            Created by the awesome developer &copy; 2022
+          </footer>
     </div>
 
-    <% for (let i=0; i < list.documents.length; i++) { %>
-        <% docs.forEach((el, index) => { %>
-            <% if (el._id == list.documents[i].split(', ')[0]) { %>
-                    <div class="modal fade" id="doc-<%= index %>" tabindex="-1" aria-labelledby="docLabel-<%= index %>" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content bg-dark">
-                            <div class="modal-header">
-                              <h3 class="modal-title" id="docLabel-<%= index %>"><%= el.title %></h3>
-                              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body d-flex flex-column align-items-center">
-                                <img class="img-fluid mb-1" src="<%= el.image %>" >
-                                <span>Written by <%= el.author %> </span>
-                                <span>Current status: <%= el.status %> </span>
-                                <span>Genre: <%= el.genre %> </span>
-                                <span>Notes: <%= el.notes %> </span>
-                                <span>Rating: <%= el.rating %> </span>
-                                <span>Where to get: <a href="<%= el.link %>" class="text-decoration-none link-light" target=”_blank”>Get</a></span>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-            <%  } %>
-        <% }) %>
-    <% } %>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container col-lg-8">
-            <a href="/" class="navbar-brand">Project0</a>
+            <a href="/dashboard/feed" class="navbar-brand">Book Street</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -79,17 +79,16 @@
     </nav>
 
     <div class="col-lg-8 mx-auto p-4 py-md-5">
-        <main>
-            <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-lines-fill me-3" viewBox="0 0 16 16">
-                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
-                </svg>
-                <div class="lh-1">
-                    <h1 class="h6 mb-0 text-white lh-1">Libraries</h1>
-                    <small>If you put some books together, you get your first library. Or not.</small>
-                </div>
+        <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-lines-fill me-3" viewBox="0 0 16 16">
+                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+            </svg>
+            <div class="lh-1">
+                <h1 class="h6 mb-0 text-white lh-1">Libraries</h1>
+                <small>If you put some books together, you get your first library. Or not.</small>
             </div>
-
+        </div>
+        <main>
             <div class="container px-4 py-5" id="custom-cards">
                 <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
                 <% lists.forEach(el => { %>
