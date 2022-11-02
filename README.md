@@ -1,5 +1,5 @@
 # [Book Street](https://bookstreet.up.railway.app/)
-A full-stack app for all sort of reading tracking and reading sharing!
+A full-stack app for all sorts of reading tracking and reading sharing!
 
 ![alt tag](https://github.com/Hopeah/Project0/blob/main/public/images/BookStreet.gif)
 
