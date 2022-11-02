@@ -98,7 +98,7 @@
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"><%= el.name %></h3>
                                 <div class="d-flex justify-content-center align-items-center">
                                     <div class="btn-group">
-                                        <button onclick="window.open('/post/<%= el._id %>', '_blank')" type="button" class="btn btn-sm btn-outline-light">View</button>
+                                        <button onclick="location.href='/post/<%= el._id %>';" type="button" class="btn btn-sm btn-outline-light">View</button>
                                         <button type="button" class="btn btn-sm btn-outline-light">Share</button>
 
                                         <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#update-<%= el._id %>">Edit</button>

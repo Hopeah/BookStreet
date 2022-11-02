@@ -7,7 +7,7 @@ module.exports = {
         try {
           const list = await List.findById(req.params.id).populate('user').populate('documents');
           const docItems = await Doc.find({userId: req.user.id})
-          res.render("list.ejs", { list: list, docs: docItems, user: req.user});
+          res.render("list.ejs", { list: list, docs: docItems, user: req.user, avatar: req.user.avatar});
         } catch (err) {
           console.log(err);
         }
