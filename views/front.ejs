@@ -39,72 +39,68 @@
   </nav>
 
   <!-- Modal for Sign Up -->
-  <div class="modal fade" id="signUp" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="signUpToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="signUpToggleLabel">Sign Up</h1>
+  <div class="modal fade" id="signUp" aria-hidden="true" data-bs-keyboard="false" aria-labelledby="signUpToggleLabel" tabindex="-1">
+    <div class="modal-dialog" style="width: 500px" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h1 class="fw-bold mb-0 fs-2">Sign Up</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <form class="px-4 py-3" id="register" action="/register" method="POST">
-            <div class="mb-3">
-              <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-              <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com" value="<%= typeof email != 'undefined' ? email : '' %>" required>
+  
+        <div class="modal-body p-5 pt-0">
+          <form class="" id="register" action="/register" method="POST">
+            <div class="form-floating mb-3">
+              <input type="name" name="name" class="form-control rounded-3" id="formName" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>" required>
+              <label for="formName">Name</label>
             </div>
-            <div class="mb-3">
-              <label for="exampleDropdownFormEmail1" class="form-label">Name</label>
-              <input type="name" name="name" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>" required>
+            <div class="form-floating mb-3">
+              <input type="email" name="email" class="form-control rounded-3" id="exampleDropdownFormEmail1" placeholder="name@example.com" value="<%= typeof email != 'undefined' ? email : '' %>" required>
+              <label for="exampleDropdownFormEmail1">Email address</label>
             </div>
-            <div class="mb-3">
-              <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>" required>
+            <div class="form-floating mb-3">
+              <input type="password" name="password" class="form-control rounded-3" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>" required>
+              <label for="exampleDropdownFormPassword1">Password</label>
             </div>
-            <div class="mb-3">
-              <label for="exampleDropdownFormPassword1" class="form-label">Repeat password</label>
-              <input type="password" name="password2" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>" required>
+            <div class="form-floating mb-3">
+              <input type="password" name="password2" class="form-control rounded-3" id="exampleDropdownFormPassword2" placeholder="Password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>" required>
+              <label for="exampleDropdownFormPassword2">Repeat password</label>
             </div>
+            <div class="form-floating mb-3 text-end">
+                <button class="btn rounded-3 btn-secondary btn-sm" data-bs-target="#logIn" data-bs-toggle="modal">Already registered, sign me in instead</button>
+                <button class="mb-2 btn btn-lg rounded-3 btn-primary" type="submit" form="register">Sign Up</button>
+            </div>
+            
+            <small class="text-muted">By clicking Sign up, you agree to the <a href="#">terms of use</a>.</small>
           </form>
         </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary btn-sm" data-bs-target="#logIn" data-bs-toggle="modal">Already registered, sign me in instead</button>
-          <button type="submit" class="btn btn-primary btn-lg" form="register">Register</button>
-        </div>
       </div>
-    </div>
+    </div> 
   </div>
 
   <!-- Modal for Log In -->
-  <div class="modal fade" id="logIn" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="logInToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="logInToggleLabel">Log In</h1>
+  <div class="modal fade" id="logIn" aria-hidden="true" data-bs-keyboard="false" aria-labelledby="logInToggleLabel" tabindex="-1">
+    <div class="modal-dialog" style="width: 500px" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h1 class="fw-bold mb-0 fs-2">Sign In</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <form class="px-4 py-3" id="login-form" action="/register/login" method="POST">
-            <div class="mb-3">
-              <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-              <input type="email" name="email" class="form-control-sm" id="exampleDropdownFormEmail1" placeholder="email@example.com" required>
+  
+        <div class="modal-body p-5 pt-0">
+          <form id="login-form" action="/register/login" method="POST">
+            <div class="form-floating mb-3">
+              <input type="email" name="email" class="form-control rounded-3" id="exampleDropdownFormEmail1" placeholder="name@example.com" required>
+              <label for="exampleDropdownFormEmail1">Email address</label>
             </div>
-            <div class="mb-3">
-              <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control-sm" id="exampleDropdownFormPassword1" placeholder="Password" required>
+            <div class="form-floating mb-3">
+              <input type="password" name="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" required>
+              <label for="floatingPassword">Password</label>
             </div>
-            <div class="mb-3">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                <label class="form-check-label" for="dropdownCheck">
-                  Remember me
-                </label>
-              </div>
+            <div class="form-floating mb-3 text-end">
+                <button class="btn rounded-3 btn-secondary btn-sm" data-bs-target="#signUp" data-bs-toggle="modal">Need to register first</button>
+                <button class="mb-2 btn btn-lg rounded-3 btn-primary" type="submit" form="login-form">Sign In</button>
             </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary btn-sm" data-bs-target="#signUp" data-bs-toggle="modal">Need to register first</button>
-          <button type="submit" class="btn btn-primary btn-lg" form="login-form">Log in</button>
         </div>
       </div>
     </div>
