@@ -1,66 +1,18 @@
-# P0 
-## Environments
+# [Book Street](https://bookstreet.up.railway.app/)
+A full-stack app for all sorts of reading tracking and reading sharing!
 
-1. QA: https://projectnol.herokuapp.com/
-2. PROD: TBD
+![alt tag](https://github.com/Hopeah/Project0/blob/main/public/images/BookStreet.gif)
 
-## Users
+## How It's Made:
 
-1. ~~Registration/login -> button that leads to a login page with login/password fields and a link to account creation if is hasn’t been done yet~~
-2. Google authentication -> an option on a login page?
-3. Successful registration email -> find a template somewhere?
-4. ~~Password storage/reminder? -> encryption?~~
-5. ~~User profile -> a separate page with fields below~~
-	1. ~~Name (change) -> empty or pre-generated first?~~
-	2. ~~Avatar (change) -> get from google if google auth, ability to upload one~~
-	3. ~~Email (change) -> get from registration~~
-	4. ~~Password (change) -> hide behind stars, changing requires email code~~
-	5. ~~Date of registration -> static from database~~
+**Tech used:** ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
-## Frontpage (not logged in users)
+## Optimizations
 
-1. About button -> on the top right, leads to an about page
-2. ~~Contact button -> on the top right, leads to a contact page~~
-3. ~~Login button -> in the center, leads to a login page~~
+Plenty of work can still be done, including (and most definitely not limited to..) integration with a book library API, responsive literature sorting according to user's wishes, more extensive literature info (e.g. date creation), other user comments on public literature/libraries, other user rating for public literature/libraries, other user profile visits, other user literature/library saving, email/password resets/changes, dark mode 
 
-## Homepage
+Priority right now: make forms for adding/editing/logging in/signing up prettier.
 
-1. ~~User Welcome -> using a set name from user profile~~
-2. Reading Progress -> current documents being read are displayed with a progress bar (screen center?)
-3. Book Wishlist -> books that are on a wish list are displayed (screen left?)
-4. Read/Paused -> books that were completed/paused are displayed (screen right?)
+## Lessons Learned:
 
-## Reading documents
-
-1. ~~Status -> marking every document based on the reading progress~~
-	1. ~~Future Read~~
-	2. ~~Active~~
-	3. ~~Paused~~
-	4. ~~Read~~
-
-## Properties
-
-Various document properties, full list can be viewed by clicking on it? Certain properties will be visible all the time (on homepage, lists?)
-
-1. ~~Title -> always~~
-2. ~~Author~~
-3. ~~Genre~~
-4. ~~Links to download/get -> always~~
-5. ~~Comments/Review/Notes -> a field that can be filled out~~
-6. ~~Rating~~
-7. ~~CloudinaryID~~
-
-## Reading lists
-
-1. ~~Create lists -> lists could contain a limited? number of documents, contain the name of who it was created by~~
-2. ~~Delete lists -> list owner can delete a list~~
-3. ~~List sharing -> a list can be freely shared by anyone with a link, ability to clone a list to become an owner of a copy~~
-
-## Bonus…
-
-1. Dark/light modes
-2. Different greeting based on time of the day
-3. Book library API
-4. Allow dragging list items around to the list owner
-5. List visibility (public/private)
-6. List info (when it was created/when it was last modified)
+My most ambitious project to date that has many directions it can evolve in. Plenty of things were learned, from enhancing UX by providing simple and accessable UI to delving deep into MongoDB integration and making use of schemas inside of schemas.
