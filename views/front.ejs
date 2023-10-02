@@ -1,170 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Street</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body class="bg-light">
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container col-lg-8">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container col-lg-8">
         <a class="navbar-brand" href="/">Book Street</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                 <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link" href="/contact">Contacts</a>
-                </li>
-            </ul>
-            <div class="dropdown text-end">
-                <form class="me-auto">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" href="#signUp">Sign Up</button>
-                    or
-                    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="modal" href="#logIn">Log In</button>
-                </form>
-            </div>
-        </div>
-    </div>
-  </nav>
-
-  <!-- Modal for Sign Up -->
-  <div class="modal fade" id="signUp" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="signUpToggleLabel" tabindex="-1">
-    <div class="modal-dialog" style="width: 500px" role="document">
-      <div class="modal-content rounded-4 shadow">
-        <div class="modal-header p-5 pb-4 border-bottom-0">
-          <h1 class="fw-bold mb-0 fs-2">Sign Up</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-  
-        <div class="modal-body p-5 pt-0">
-          <form class="" id="register" action="/register" method="POST">
-            <div class="form-floating mb-3">
-              <input type="name" name="name" class="form-control rounded-3" id="formName" placeholder="Name" value="<%= typeof name != 'undefined' ? name : '' %>" required>
-              <label for="formName">Name</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="email" name="email" class="form-control rounded-3" id="exampleDropdownFormEmail1" placeholder="name@example.com" value="<%= typeof email != 'undefined' ? email : '' %>" required>
-              <label for="exampleDropdownFormEmail1">Email address</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="password" name="password" class="form-control rounded-3" id="exampleDropdownFormPassword1" placeholder="Password" value="<%= typeof password != 'undefined' ? password : '' %>" required>
-              <label for="exampleDropdownFormPassword1">Password</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="password" name="password2" class="form-control rounded-3" id="exampleDropdownFormPassword2" placeholder="Password" value="<%= typeof password2 != 'undefined' ? password2 : '' %>" required>
-              <label for="exampleDropdownFormPassword2">Repeat password</label>
-            </div>
-            <div class="form-floating mb-3 text-end">
-                <button class="btn rounded-3 btn-secondary btn-sm" data-bs-target="#logIn" data-bs-toggle="modal">Already registered, sign me in instead</button>
-                <button class="mb-2 btn btn-lg rounded-3 btn-primary" type="submit" form="register">Sign Up</button>
-            </div>
-            
-            <small class="text-muted">By clicking Sign up, you agree to the <a href="#">terms of use</a>.</small>
-          </form>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contacts</a>
+            </li>
+          </ul>
+          <div class="dropdown text-end">
+            <form class="me-auto">
+              <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="modal"
+                href="#signUp"
+              >
+                Sign Up
+              </button>
+              or
+              <button
+                class="btn btn-sm btn-outline-secondary"
+                type="button"
+                data-bs-toggle="modal"
+                href="#logIn"
+              >
+                Log In
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div> 
-  </div>
+    </nav>
 
-  <!-- Modal for Log In -->
-  <div class="modal fade" id="logIn" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="logInToggleLabel" tabindex="-1">
-    <div class="modal-dialog" style="width: 500px" role="document">
-      <div class="modal-content rounded-4 shadow">
-        <div class="modal-header p-5 pb-4 border-bottom-0">
-          <h1 class="fw-bold mb-0 fs-2">Sign In</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-  
-        <div class="modal-body p-5 pt-0">
-          <form id="login-form" action="/register/login" method="POST">
-            <div class="form-floating mb-3">
-              <input type="email" name="email" class="form-control rounded-3" id="exampleDropdownFormEmail1" placeholder="name@example.com" required>
-              <label for="exampleDropdownFormEmail1">Email address</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="password" name="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" required>
-              <label for="floatingPassword">Password</label>
-            </div>
-            <div class="form-floating mb-3 text-end">
-                <button class="btn rounded-3 btn-secondary btn-sm" data-bs-target="#signUp" data-bs-toggle="modal">Need to register first</button>
-                <button class="mb-2 btn btn-lg rounded-3 btn-primary" type="submit" form="login-form">Sign In</button>
-            </div>
-          </form>
+    <!-- Modal for Sign Up -->
+    <div
+      class="modal fade"
+      id="signUp"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      aria-labelledby="signUpToggleLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog" style="width: 500px" role="document">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header p-5 pb-4 border-bottom-0">
+            <h1 class="fw-bold mb-0 fs-2">Sign Up</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body p-5 pt-0">
+            <form class="" id="register" action="/register" method="POST">
+              <div class="form-floating mb-3">
+                <input
+                  type="name"
+                  name="name"
+                  class="form-control rounded-3"
+                  id="formName"
+                  placeholder="Name"
+                  value="<%= typeof name != 'undefined' ? name : '' %>"
+                  required
+                />
+                <label for="formName">Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control rounded-3"
+                  id="exampleDropdownFormEmail1"
+                  placeholder="name@example.com"
+                  value="<%= typeof email != 'undefined' ? email : '' %>"
+                  required
+                />
+                <label for="exampleDropdownFormEmail1">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control rounded-3"
+                  id="exampleDropdownFormPassword1"
+                  placeholder="Password"
+                  value="<%= typeof password != 'undefined' ? password : '' %>"
+                  required
+                />
+                <label for="exampleDropdownFormPassword1">Password</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  name="password2"
+                  class="form-control rounded-3"
+                  id="exampleDropdownFormPassword2"
+                  placeholder="Password"
+                  value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+                  required
+                />
+                <label for="exampleDropdownFormPassword2"
+                  >Repeat password</label
+                >
+              </div>
+              <div class="form-floating mb-3 text-end">
+                <button
+                  class="btn rounded-3 btn-secondary btn-sm"
+                  data-bs-target="#logIn"
+                  data-bs-toggle="modal"
+                >
+                  Already registered, sign me in instead
+                </button>
+                <button
+                  class="mb-2 btn btn-lg rounded-3 btn-primary"
+                  type="submit"
+                  form="register"
+                >
+                  Sign Up
+                </button>
+              </div>
+
+              <small class="text-muted"
+                >By clicking Sign up, you agree to the
+                <a href="#">terms of use</a>.</small
+              >
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- Modal for Log In -->
+    <div
+      class="modal fade"
+      id="logIn"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      aria-labelledby="logInToggleLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog" style="width: 500px" role="document">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header p-5 pb-4 border-bottom-0">
+            <h1 class="fw-bold mb-0 fs-2">Sign In</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body p-5 pt-0">
+            <form id="login-form" action="/register/login" method="POST">
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control rounded-3"
+                  id="exampleDropdownFormEmail1"
+                  placeholder="name@example.com"
+                  required
+                />
+                <label for="exampleDropdownFormEmail1">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control rounded-3"
+                  id="floatingPassword"
+                  placeholder="Password"
+                  required
+                />
+                <label for="floatingPassword">Password</label>
+              </div>
+              <div class="form-floating mb-3 text-end">
+                <button
+                  class="btn rounded-3 btn-secondary btn-sm"
+                  data-bs-target="#signUp"
+                  data-bs-toggle="modal"
+                >
+                  Need to register first
+                </button>
+                <button
+                  class="mb-2 btn btn-lg rounded-3 btn-primary"
+                  type="submit"
+                  form="login-form"
+                >
+                  Sign In
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div><%- include ("./partials/messages") %></div>
 
     <!-- Main section -->
     <main>
-      <div class="pricing-header p-3 pb-md-4 mx-auto text-center" style="max-width: 700px;">
-          <h1 class="display-4 fw-normal">Welcome!</h1>
-          <p class="fs-5 text-muted">You probably wondering, why are you here? <br>Let me help you a bit. There are three main reason to be here.</p>
+      <div
+        class="pricing-header p-3 pb-md-4 mx-auto text-center"
+        style="max-width: 700px"
+      >
+        <h1 class="display-4 fw-normal">Welcome!</h1>
+        <p class="fs-5 text-muted">
+          You probably wondering, why are you here? <br />Let me help you a bit.
+          There are three main reason to be here.
+        </p>
       </div>
-      
+
       <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-          <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm">
-              <div class="card-header py-3">
-                <h4 class="my-0 fw-normal">You have an account</h4>
-              </div>
-              <div class="card-body">
-                  <div class="mt-3 mb-4">
-                      You already know what's inside, so you now why you are here. And yes - we missed you too!
-                  </div>
-                <button type="button" class="w-100 btn btn-lg btn-outline-primary" data-bs-toggle="modal" href="#logIn">Log In</button>
-              </div>
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">You have an account</h4>
             </div>
-          </div>
-          <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm border-primary">
-              <div class="card-header py-3 text-bg-primary border-primary">
-                <h4 class="my-0 fw-normal">Got someone's recommendation</h4>
+            <div class="card-body">
+              <div class="mt-3 mb-4">
+                You already know what's inside, so you now why you are here. And
+                yes - we missed you too!
               </div>
-              <div class="card-body">
-                <div class="mt-3 mb-4">
-                  You probably have been already told that we have tons of amazing books, unlimited number of shared lists, friendly community, right? But did you know that it's totally FREE? <br>Absolutely!<br> Absolutely no reason to wait! Join, we are glad to see you!
-                </div>
-                <button type="button" class="w-100 btn btn-lg btn-primary" data-bs-toggle="modal" href="#signUp">Sing Up</button>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm">
-              <div class="card-header py-3">
-                <h4 class="my-0 fw-normal">Wonder who built it</h4>
-              </div>
-              <div class="card-body">
-                <div class="mt-3 mb-4">
-                  Well, we always happy to meet new people and new ideas. Don't hesitate, let's get to know each other!
-                </div>
-                <form class="me-auto" action="/contact"><button type="submit" class="w-100 btn btn-lg btn-outline-secondary">Contact us</button></form>
-              </div>
+              <button
+                type="button"
+                class="w-100 btn btn-lg btn-outline-primary"
+                data-bs-toggle="modal"
+                href="#logIn"
+              >
+                Log In
+              </button>
             </div>
           </div>
         </div>
-  
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm border-primary">
+            <div class="card-header py-3 text-bg-primary border-primary">
+              <h4 class="my-0 fw-normal">Got someone's recommendation</h4>
+            </div>
+            <div class="card-body">
+              <div class="mt-3 mb-4">
+                You probably have been already told that we have tons of amazing
+                books, unlimited number of shared lists, friendly community,
+                right? But did you know that it's totally FREE?
+                <br />Absolutely!<br />
+                Absolutely no reason to wait! Join, we are glad to see you!
+              </div>
+              <button
+                type="button"
+                class="w-100 btn btn-lg btn-primary"
+                data-bs-toggle="modal"
+                href="#signUp"
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">Wonder who built it</h4>
+            </div>
+            <div class="card-body">
+              <div class="mt-3 mb-4">
+                Well, we always happy to meet new people and new ideas. Don't
+                hesitate, let's get to know each other!
+              </div>
+              <form class="me-auto" action="/contact">
+                <button
+                  type="submit"
+                  class="w-100 btn btn-lg btn-outline-secondary"
+                >
+                  Contact us
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer class="pt-5 my-5 text-muted border-top">
-      Created by an <a href="https://irinapetrova.dev/"> awesome developer</a>&copy; 2023
+      Created by an
+      <a href="https://irinapetrova.dev/"> awesome developer</a>&copy; 2023
     </footer>
-  
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  </body>
 </html>
